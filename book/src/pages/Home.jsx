@@ -1,0 +1,170 @@
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./Home.css";
+import { db } from "../firebase";
+import { collection, query, orderBy, getDocs } from "firebase/firestore";
+import { useWishlist } from "./WishContext";
+
+const images = import.meta.glob("../assets/images/*.{png,jpg,jpeg,svg}", {
+  eager: true,
+});
+
+const getImage = (imageName) => {
+  const matchedImage = Object.keys(images).find((key) =>
+    key.includes(imageName)
+  );
+  return matchedImage ? images[matchedImage].default : null;
+};
+
+const Home = ({ limit = 8, one = 1, six = 6 }) => {
+  const { wishlistCount } = useWishlist();
+  const [books, setBooks] = useState([]);
+  const { addToWishlist } = useWishlist();
+  useEffect(() => {
+    const fetchBooks = async () => {
+      const booksCollection = collection(db, "books");
+      const booksQuery = query(booksCollection, orderBy("createdAt", "desc"));
+      const booksSnapshot = await getDocs(booksQuery);
+      const booksList = booksSnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setBooks(booksList);
+    };
+
+    fetchBooks();
+  }, []);
+
+  const getRandomBook = (books) => {
+    if (books.length === 0) return null;
+    const randomIndex = Math.floor(Math.random() * books.length);
+    return books[randomIndex];
+  };
+  const displayedBooks = limit ? books.slice(0, limit) : books;
+  const todayDeal = six ? books.slice(0, six) : books;
+  const OneBook = one ? [getRandomBook(books)] : books;
+  return (
+    <>
+      <main className="mainContainer">
+        <div className="mainHeader">
+          <nav>
+            <div className="menuCategory">
+              <div className="toggle-cat-wrap">
+                <FontAwesomeIcon icon="fa-solid fa-bars-staggered" />
+              </div>
+              <ul></ul>
+            </div>
+            <ul className="mainHeader-col2">
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/">Blog</Link>
+              </li>
+              <li>
+                <Link to="/">Shop</Link>
+              </li>
+              <li>
+                <Link to="/">Most Popular</Link>
+              </li>
+              <li>
+                <Link to="/">New Arrival</Link>
+              </li>
+              <li>
+                <Link to="/">on Sale</Link>
+              </li>
+              <li>
+                <Link to="/">Contact us</Link>
+              </li>
+            </ul>
+            <section className="mainHeader-col3">
+              <div className="header-support">
+                <a href="#" className="btn-main-header">
+                  Order Your Book now
+                </a>
+              </div>
+            </section>
+          </nav>
+        </div>
+
+        <div className="Container">
+          <div className="logIn">
+            <ul>
+              <li>
+                <FontAwesomeIcon icon="fa-solid fa-lock" />
+              </li>
+              <li>
+                <Link to="/wishlist">
+                  <FontAwesomeIcon icon="fa-regular fa-heart" />
+                  <span>({wishlistCount})</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div className="mainArea">
+            <div className="primaryContent">
+              <h2>All in one Book store</h2>
+              <div className="Books">
+                <ul className="bookList main">
+                  {displayedBooks.map((book) => (
+                    <li key={book.id} className="book-item">
+                      <img src={getImage(book.imageLink)} alt={book.title} />
+                      <div className="bookDetails">
+                        <h2>{book.title}</h2>
+                        <p>Author: {book.author}</p>
+                        <span
+                          onClick={() => addToWishlist(book)}
+                          className="wishIcon"
+                        >
+                          <FontAwesomeIcon icon="fa-regular fa-heart" />
+                        </span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <section className="Today">
+                <h2>Today's deal</h2>
+                <div className="Content">
+                  <div className="tabContent">
+                    <ul className="bookList today">
+                      {todayDeal.map((book) => (
+                        <li key={book.id} className="book-item">
+                          <img src={getImage(book.imageLink)} alt="" />
+                          <div className="bookDetails">
+                            <h2>{book.title}</h2>
+                            <p>Author: {book.author}</p>
+                            <span
+                              onClick={() => addToWishlist(book)}
+                              className="wishIcon"
+                            >
+                              <FontAwesomeIcon icon="fa-regular fa-heart" />
+                            </span>
+                          </div>
+                        </li>
+                      ))}
+                      {OneBook.map(
+                        (book) =>
+                          book && (
+                            <li key={book.id} className="wrap">
+                              <img src={getImage(book.imageLink)} alt="" />
+                              <div className="bookDetails">
+                                <h2>{book.title}</h2>
+                              </div>
+                            </li>
+                          )
+                      )}
+                    </ul>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </main>
+    </>
+  );
+};
+
+export default Home;

@@ -1,0 +1,61 @@
+.bookList{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1500px;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: space-between;
+    row-gap: 20px;
+    gap: 10px;
+}
+
+.Title{
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+
+
+.bookList li{
+    width: 220px;
+    /* border: 1px solid; */
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+    box-shadow: 0 5px 15px #000;
+    text-align: left;
+    border-radius: 10px;
+
+}
+
+.bookList li img{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 100%;
+    height: 200px;
+}
+
+
+.bookDetails h2{
+    font-size: 1em;
+    text-align: center;
+}
+
+.bookDetails{
+    padding: 1em;
+    line-height: 2;
+    text-align: center;
+}
+.bookDetails p{
+    font-size: .9em;
+}
+
+.bookDetails a{
+    display: flex;
+    justify-content: center;
+    background-color: red;
+    border-radius: 10px;
+    color: greenyellow;
+}

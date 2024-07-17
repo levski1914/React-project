@@ -1,0 +1,45 @@
+.slider-container {
+    width: 960px !important;
+    position: relative;
+    overflow: hidden;
+
+    padding: 3em 0;
+}
+
+
+.controls{
+    position: absolute;
+    z-index: 100;
+
+    right: 0;
+    display: flex;
+    gap: 20px;
+    padding-right: 2em;
+    top: -5px;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 25%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.slide img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.slider-arrow {
+
+    font-size: 45px;
+    color: #000;
+    cursor: pointer;
+    z-index: 1;
+}
+

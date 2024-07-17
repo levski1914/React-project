@@ -1,6 +1,6 @@
 /* src/components/Header.css */
 .header {
-    background-color: #2E3741;
+  background: linear-gradient(135deg, #ff6f61, #ff9a8b);
     color: #fff;
     padding: 10px 0;
   }

@@ -5,6 +5,8 @@ import "./Home.css";
 import { db } from "../firebase";
 import { collection, query, orderBy, getDocs } from "firebase/firestore";
 import { useWishlist } from "./WishContext";
+import Cards from "./Cards";
+import ImageSlider from "../components/ImageSlider";
 
 const images = import.meta.glob("../assets/images/*.{png,jpg,jpeg,svg}", {
   eager: true,
@@ -17,7 +19,7 @@ const getImage = (imageName) => {
   return matchedImage ? images[matchedImage].default : null;
 };
 
-const Home = ({ limit = 8, one = 1, six = 6 }) => {
+const Home = ({ limit = 8, one = 1, six =4, slides }) => {
   const { wishlistCount } = useWishlist();
   const [books, setBooks] = useState([]);
   const { addToWishlist } = useWishlist();
@@ -107,20 +109,11 @@ const Home = ({ limit = 8, one = 1, six = 6 }) => {
               <h2>All in one Book store</h2>
               <div className="Books">
                 <ul className="bookList main">
-                  {displayedBooks.map((book) => (
-                    <li key={book.id} className="book-item">
-                      <img src={getImage(book.imageLink)} alt={book.title} />
-                      <div className="bookDetails">
-                        <h2>{book.title}</h2>
-                        <p>Author: {book.author}</p>
-                        <span
-                          onClick={() => addToWishlist(book)}
-                          className="wishIcon"
-                        >
-                          <FontAwesomeIcon icon="fa-regular fa-heart" />
-                        </span>
-                      </div>
-                    </li>
+                {displayedBooks.map((book) => (
+                    <Cards key={book.id} book={book} addToWishlist={addToWishlist} getImage={getImage}>
+                      <h2 slot="header">{book.title}</h2>
+                      <p slot="content">Author: {book.author}</p>
+                    </Cards>
                   ))}
                 </ul>
               </div>
@@ -130,19 +123,7 @@ const Home = ({ limit = 8, one = 1, six = 6 }) => {
                   <div className="tabContent">
                     <ul className="bookList today">
                       {todayDeal.map((book) => (
-                        <li key={book.id} className="book-item">
-                          <img src={getImage(book.imageLink)} alt="" />
-                          <div className="bookDetails">
-                            <h2>{book.title}</h2>
-                            <p>Author: {book.author}</p>
-                            <span
-                              onClick={() => addToWishlist(book)}
-                              className="wishIcon"
-                            >
-                              <FontAwesomeIcon icon="fa-regular fa-heart" />
-                            </span>
-                          </div>
-                        </li>
+                        <Cards key={book.id} book={book} addToWishlist={addToWishlist} getImage={getImage} />
                       ))}
                       {OneBook.map(
                         (book) =>
@@ -151,6 +132,12 @@ const Home = ({ limit = 8, one = 1, six = 6 }) => {
                               <img src={getImage(book.imageLink)} alt="" />
                               <div className="bookDetails">
                                 <h2>{book.title}</h2>
+                                <span
+                              onClick={() => addToWishlist(book)}
+                              className="wishIcon"
+                            >
+                              <FontAwesomeIcon icon="fa-regular fa-heart" />
+                            </span>
                               </div>
                             </li>
                           )
@@ -159,10 +146,14 @@ const Home = ({ limit = 8, one = 1, six = 6 }) => {
                   </div>
                 </div>
               </section>
+              <section className="populart">
+              <ImageSlider books={books} addToWishlist={addToWishlist} getImage={getImage} />
+              </section>
             </div>
           </div>
         </div>
       </main>
+
     </>
   );
 };

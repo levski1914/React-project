@@ -6,6 +6,9 @@ import { db } from "../firebase";
 import { collection, query, orderBy, getDocs } from "firebase/firestore";
 import { useWishlist } from "./WishContext";
 
+import RatingStars from "../components/Rating";
+import Books from "../components/Books";
+import CarouselSlider from "../components/CarouselSlider";
 const images = import.meta.glob("../assets/images/*.{png,jpg,jpeg,svg}", {
   eager: true,
 });
@@ -21,6 +24,7 @@ const Home = ({ limit = 8, one = 1, six = 6 }) => {
   const { wishlistCount } = useWishlist();
   const [books, setBooks] = useState([]);
   const { addToWishlist } = useWishlist();
+  const [value, setValue] = useState(2);
   useEffect(() => {
     const fetchBooks = async () => {
       const booksCollection = collection(db, "books");
@@ -55,10 +59,8 @@ const Home = ({ limit = 8, one = 1, six = 6 }) => {
               </div>
               <ul></ul>
             </div>
+
             <ul className="mainHeader-col2">
-              <li>
-                <Link to="/">Home</Link>
-              </li>
               <li>
                 <Link to="/">Blog</Link>
               </li>
@@ -108,19 +110,13 @@ const Home = ({ limit = 8, one = 1, six = 6 }) => {
               <div className="Books">
                 <ul className="bookList main">
                   {displayedBooks.map((book) => (
-                    <li key={book.id} className="book-item">
-                      <img src={getImage(book.imageLink)} alt={book.title} />
-                      <div className="bookDetails">
-                        <h2>{book.title}</h2>
-                        <p>Author: {book.author}</p>
-                        <span
-                          onClick={() => addToWishlist(book)}
-                          className="wishIcon"
-                        >
-                          <FontAwesomeIcon icon="fa-regular fa-heart" />
-                        </span>
-                      </div>
-                    </li>
+                    <Books
+                      className="book-item"
+                      key={book.id}
+                      book={book}
+                      addToWishlist={addToWishlist}
+                      getImage={getImage}
+                    />
                   ))}
                 </ul>
               </div>
@@ -130,19 +126,13 @@ const Home = ({ limit = 8, one = 1, six = 6 }) => {
                   <div className="tabContent">
                     <ul className="bookList today">
                       {todayDeal.map((book) => (
-                        <li key={book.id} className="book-item">
-                          <img src={getImage(book.imageLink)} alt="" />
-                          <div className="bookDetails">
-                            <h2>{book.title}</h2>
-                            <p>Author: {book.author}</p>
-                            <span
-                              onClick={() => addToWishlist(book)}
-                              className="wishIcon"
-                            >
-                              <FontAwesomeIcon icon="fa-regular fa-heart" />
-                            </span>
-                          </div>
-                        </li>
+                        <Books
+                          className="book-item"
+                          key={book.id}
+                          book={book}
+                          addToWishlist={addToWishlist}
+                          getImage={getImage}
+                        />
                       ))}
                       {OneBook.map(
                         (book) =>
@@ -159,6 +149,7 @@ const Home = ({ limit = 8, one = 1, six = 6 }) => {
                   </div>
                 </div>
               </section>
+              <CarouselSlider />
             </div>
           </div>
         </div>

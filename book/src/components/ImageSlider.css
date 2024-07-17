@@ -2,7 +2,7 @@
     width: 960px !important;
     position: relative;
     overflow: hidden;
-
+    margin: 1em auto;
     padding: 3em 0;
 }
 
@@ -15,7 +15,7 @@
     display: flex;
     gap: 20px;
     padding-right: 2em;
-    top: -5px;
+    top: 20px;
 }
 
 .slider {
@@ -37,9 +37,24 @@
 
 .slider-arrow {
 
-    font-size: 45px;
+    font-size: 20px;
     color: #000;
     cursor: pointer;
     z-index: 1;
+    border: 1px solid;
+    padding: .2em;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s;
+    border-radius: 10px;
+
 }
 
+.slider-arrow:hover{
+    color: #fff !important;
+    background-color: #000;
+    transition: all .3s;
+}

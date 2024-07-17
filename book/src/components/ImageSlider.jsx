@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { db } from '../firebase';
-import { collection, query, orderBy, getDocs } from 'firebase/firestore';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './ImageSlider.css';
+import React, { useEffect, useState } from "react";
+import { db } from "../firebase";
+import { collection, query, orderBy, getDocs } from "firebase/firestore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./ImageSlider.css";
 
-import Cards from '../pages/Cards';
+import Cards from "../pages/Cards";
 
 const ImageSlider = ({ book, addToWishlist, getImage }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,14 +14,15 @@ const ImageSlider = ({ book, addToWishlist, getImage }) => {
 
   useEffect(() => {
     const fetchBooks = async () => {
-      const booksCollection = collection(db, 'books');
+      const booksCollection = collection(db, "books");
       const booksQuery = query(booksCollection, orderBy("createdAt", "desc"));
       const booksSnapshot = await getDocs(booksQuery);
       const booksList = booksSnapshot.docs.map((doc) => ({
-        ...doc.data(), id: doc.id,
+        ...doc.data(),
+        id: doc.id,
       }));
       setBooks(booksList);
-    }
+    };
     fetchBooks();
   }, []);
 
@@ -31,7 +32,8 @@ const ImageSlider = ({ book, addToWishlist, getImage }) => {
   };
 
   const goToPrevious = () => {
-    const newIndex = (currentIndex - slidesToScroll + books.length) % books.length;
+    const newIndex =
+      (currentIndex - slidesToScroll + books.length) % books.length;
     setCurrentIndex(newIndex);
   };
 
@@ -50,23 +52,26 @@ const ImageSlider = ({ book, addToWishlist, getImage }) => {
     <>
       <div className="slider-container">
         <div className="controls">
-
-            <div className="slider-arrow left-arrow" onClick={goToPrevious}>
+          <div className="slider-arrow left-arrow" onClick={goToPrevious}>
             ❰
-            </div>
-            <div className="slider-arrow right-arrow" onClick={goToNext}>
+          </div>
+          <div className="slider-arrow right-arrow" onClick={goToNext}>
             ❱
-            </div>
+          </div>
         </div>
         <div className="slider">
           {getSlidesToShow().map((book, index) => (
-              <Cards key={book.id} book={book} addToWishlist={addToWishlist} getImage={getImage} />
+            <Cards
+              key={book.id}
+              book={book}
+              addToWishlist={addToWishlist}
+              getImage={getImage}
+            />
           ))}
         </div>
-
       </div>
     </>
   );
-}
+};
 
 export default ImageSlider;

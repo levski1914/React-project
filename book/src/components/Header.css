@@ -1,56 +1,101 @@
-/* src/components/Header.css */
 .header {
-  background: linear-gradient(135deg, #ff6f61, #ff9a8b);
-    color: #fff;
-    padding: 10px 0;
-  }
-  
-  .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
+  background-color: #ff6f61;
+  padding: 20px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  
-  .nav-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 15px;
-  }
-  
-  .nav-links li {
-    display: inline;
-  }
-  
-  .nav-links a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 16px;
-  }
-  
-  .nav-links a:hover {
-    text-decoration: underline;
-  }
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
 
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-  .prof{
-    display: flex;
-    gap: 20px;
-    color: #FFF;
-  }
+.search input[type="text"] {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 200px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-  .prof li a{
-    color: #fff;
-  }
+.search select {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search button {
+  padding: 10px 20px;
+  background-color: #ffdd57;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search button:hover {
+  background-color: #ffcc00;
+}
+
+.prof {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.prof li {
+  list-style: none;
+}
+
+.prof a {
+  color: #fff;
+  font-size: 18px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li {
+  list-style: none;
+}
+
+.nav-links a {
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #ffdd57;
+}
+
+.header-part {
+  position: relative;
+  margin-top: -5px;
+}
+
+.header-part img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}

@@ -10,10 +10,10 @@ const Books = ({ book, addToWishlist, getImage }) => {
       <div className="bookDetails">
         <h2>{book.title}</h2>
         <p>Author: {book.author}</p>
-        <span onClick={() => addToWishlist(book)} className="wishIcon">
-          <FontAwesomeIcon icon="fa-regular fa-heart" />
-        </span>
       </div>
+      <span onClick={() => addToWishlist(book)} className="wishIcon">
+        <FontAwesomeIcon icon="fa-regular fa-heart" />
+      </span>
     </li>
   );
 };

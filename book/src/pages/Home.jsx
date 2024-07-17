@@ -7,10 +7,7 @@ import { collection, query, orderBy, getDocs } from "firebase/firestore";
 import { useWishlist } from "./WishContext";
 import Cards from "./Cards";
 import ImageSlider from "../components/ImageSlider";
-
 import RatingStars from "../components/Rating";
-import Books from "../components/Books";
-import CarouselSlider from "../components/CarouselSlider";
 const images = import.meta.glob("../assets/images/*.{png,jpg,jpeg,svg}", {
   eager: true,
 });
@@ -22,11 +19,10 @@ const getImage = (imageName) => {
   return matchedImage ? images[matchedImage].default : null;
 };
 
-const Home = ({ limit = 8, one = 1, six = 4, slides }) => {
+const Home = ({ limit = 8, one = 1, six = 4, slides, book }) => {
   const { wishlistCount } = useWishlist();
   const [books, setBooks] = useState([]);
   const { addToWishlist } = useWishlist();
-  const [value, setValue] = useState(2);
   useEffect(() => {
     const fetchBooks = async () => {
       const booksCollection = collection(db, "books");
@@ -106,6 +102,7 @@ const Home = ({ limit = 8, one = 1, six = 4, slides }) => {
               </li>
             </ul>
           </div>
+          {/* <RatingStars bookId={books.id} initialRating={books.rating} /> */}
           <div className="mainArea">
             <div className="primaryContent">
               <h2>All in one Book store</h2>

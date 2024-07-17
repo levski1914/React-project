@@ -6,10 +6,10 @@
 .star{
     cursor: pointer;
     font-size: 2em;
-    color: #ccc;
+    color: #ccc !important;
     transition: color 0.2s;
 }
 
 .star.filled{
-    color:gold;
+    color:gold !important;
 }

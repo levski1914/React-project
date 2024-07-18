@@ -53,25 +53,25 @@ const ManageBooks = () => {
     }
   };
 
-  const handleAddBooksFromJson = async () => {
-    try {
-      const booksCollection = collection(db, "books");
-      for (const book of booksData) {
-        await addDoc(booksCollection, {
-          ...book,
-          createdAt: serverTimestamp(),
-        });
-      }
-      const booksSnapshot = await getDocs(booksCollection);
-      const booksList = booksSnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setBooks(booksList);
-    } catch (error) {
-      console.error("Error adding books from JSON: ", error);
-    }
-  };
+  // const handleAddBooksFromJson = async () => {
+  //   try {
+  //     const booksCollection = collection(db, "books");
+  //     for (const book of booksData) {
+  //       await addDoc(booksCollection, {
+  //         ...book,
+  //         createdAt: serverTimestamp(),
+  //       });
+  //     }
+  //     const booksSnapshot = await getDocs(booksCollection);
+  //     const booksList = booksSnapshot.docs.map((doc) => ({
+  //       ...doc.data(),
+  //       id: doc.id,
+  //     }));
+  //     setBooks(booksList);
+  //   } catch (error) {
+  //     console.error("Error adding books from JSON: ", error);
+  //   }
+  // };
 
   const handleUpdateBook = async (id) => {
     const newTitle = prompt("Enter new title");
@@ -111,13 +111,19 @@ const ManageBooks = () => {
         />
         <button type="submit">Add Book</button>
       </form>
-      <button onClick={handleAddBooksFromJson}>Add Books from JSON</button>
+      {/* <button onClick={handleAddBooksFromJson}>Add Books from JSON</button> */}
       <ul>
         {books.map((book) => (
           <li key={book.id}>
             {book.title} by {book.author}
-            <button onClick={() => handleUpdateBook(book.id)}>Edit</button>
-            <button onClick={() => handleDeleteBook(book.id)}>Delete</button>
+            {book.userId === currentUser.uid && ( // Условие за показване на бутоните за редактиране и изтриване
+              <>
+                <button onClick={() => handleUpdateBook(book.id)}>Edit</button>
+                <button onClick={() => handleDeleteBook(book.id)}>
+                  Delete
+                </button>
+              </>
+            )}
           </li>
         ))}
       </ul>

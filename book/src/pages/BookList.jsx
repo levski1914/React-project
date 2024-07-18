@@ -25,7 +25,7 @@ const BookList = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       const booksCollection = collection(db, "books");
-      const booksQuery = query(booksCollection, orderBy(sortType, sortOrder)); 
+      const booksQuery = query(booksCollection, orderBy(sortType, sortOrder));
       const booksSnapshot = await getDocs(booksQuery);
       const booksList = booksSnapshot.docs.map((doc) => ({
         ...doc.data(),
@@ -50,7 +50,9 @@ const BookList = () => {
   };
 
   const filteredBooks = books.filter((book) =>
-    book.title ? book.title.toLowerCase().includes(searchTerm.toLowerCase()):false
+    book.title
+      ? book.title.toLowerCase().includes(searchTerm.toLowerCase())
+      : false
   );
 
   return (
@@ -85,10 +87,13 @@ const BookList = () => {
               <p>Language: {book.language}</p>
               <p>Year: {book.year}</p>
               <a href={book.link}>More info</a>
-              <button onClick={() => addToWishlist(book)}>
-                Add to Wishlist
-              </button>
-              <RatingStars bookId={book.id} initialRating={book.rating} />
+
+              <div className="button">
+                <button onClick={() => addToWishlist(book)}>
+                  Add to Wishlist
+                </button>
+                <RatingStars bookId={book.id} initialRating={book.rating} />
+              </div>
             </div>
           </li>
         ))}

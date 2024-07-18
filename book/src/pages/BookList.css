@@ -5,23 +5,24 @@
     width: 100%;
     margin: 0 auto;
     justify-content: center; /* Подрежда елементите в центъра */
-    gap: 20px; /* Разстояние между картите */
+    gap: 30px; /* Разстояние между картите */
     transition: grid-template-columns 0.3s ease-in-out;
 }
 
 .bookList li {
-    width: 220px;
+    width: 330px;
     /* border: 1px solid; */
-    height: auto;
+    height:550px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* justify-content: center; */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: left;
     border-radius: 10px;
     transition: transform 0.2s;
     background-color: #fff; /* Фон за картите */
-    padding: 1em;
+    /* padding: 1em; */
 }
 
 .bookList li:hover {
@@ -32,8 +33,12 @@
 .bookList li img {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    width: 100%;
+    width: 300px;
+    padding-top: .5em;
     height: 250px;
+    /* object-fit: contain; */
+    /* object-position: top center; */
+    /* object-position: center;   */
 }
 
 .bookDetails h2 {

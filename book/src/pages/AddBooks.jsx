@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 
 const AddBooks = () => {
@@ -9,7 +9,19 @@ const AddBooks = () => {
   const handleAddBook = async (e) => {
     e.preventDefault();
     try {
-      await addDoc(collection(db, "books"), { title, author });
+      const userId = auth.currentUser.uid;
+      await addDoc(collection(db, "books"), {
+        title,
+        author,
+        userId: currentUser.uid,
+        createdAt: new Date(),
+      });
+      setBooks([
+        ...books,
+        { id: docRef.id, title, author, userId: currentUser.uid },
+      ]);
+      setTitle("");
+      setAuthor("");
     } catch (error) {
       console.error(error);
     }

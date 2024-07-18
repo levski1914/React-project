@@ -50,8 +50,11 @@ const BookList = () => {
   };
 
   const filteredBooks = books.filter((book) =>
-    book.title.toLowerCase().includes(searchTerm.toLowerCase())
+    book.title
+      ? book.title.toLowerCase().includes(searchTerm.toLowerCase())
+      : false
   );
+
   return (
     <div>
       <h1 className="Title">Book List</h1>

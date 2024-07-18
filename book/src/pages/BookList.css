@@ -1,110 +1,80 @@
-/* Main Container for Book List */
 .bookList {
     display: flex;
     flex-wrap: wrap;
     max-width: 1500px;
     width: 100%;
     margin: 0 auto;
-    justify-content: space-between;
-    row-gap: 20px;
-    gap: 10px;
-    padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 10px;
+    justify-content: center; /* Подрежда елементите в центъра */
+    gap: 20px; /* Разстояние между картите */
+    transition: grid-template-columns 0.3s ease-in-out;
 }
 
-/* Title of the Book List */
-.Title {
-    text-align: center;
-    margin-bottom: 1em;
-    font-size: 2.5em;
-    color: #333;
-}
-
-/* Individual Book Cards */
 .bookList li {
     width: 220px;
+    /* border: 1px solid; */
     height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: left;
     border-radius: 10px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s;
+    background-color: #fff; /* Фон за картите */
+    padding: 1em;
 }
 
-/* Hover Effect for Book Cards */
 .bookList li:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border: 2px solid #ff6f61;
 }
 
-/* Book Images */
 .bookList li img {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     width: 100%;
     height: 250px;
-    border-radius: 10px;
-    object-fit: cover;
 }
 
-/* Book Details Container */
+.bookDetails h2 {
+    font-size: 1.2em;
+    text-align: center;
+}
+
 .bookDetails {
     padding: 1em;
     line-height: 1.5;
     text-align: center;
 }
 
-/* Book Title */
-.bookDetails h2 {
-    font-size: 1.5em;
-    margin: 0.5em 0;
-    color: #333;
-}
-
-/* Book Details Text */
 .bookDetails p {
     font-size: 0.9em;
-    color: #777;
 }
 
-/* More Info Link */
 .bookDetails a {
-    display: block;
+    display: inline-block;
+    padding: 10px 15px;
     margin: 10px 0;
-    padding: 10px;
     background-color: #ff6f61;
     border-radius: 5px;
     color: #fff;
     text-decoration: none;
-    transition: background-color 0.3s;
 }
 
-/* Hover Effect for More Info Link */
-.bookDetails a:hover {
-    background-color: #ff4500;
-}
-
-/* Wishlist Button */
 .bookDetails button {
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #6c757d;
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #555;
     border: none;
     border-radius: 5px;
     color: #fff;
     cursor: pointer;
-    transition: background-color 0.3s;
+    margin-bottom: 10px;
 }
 
-/* Hover Effect for Wishlist Button */
 .bookDetails button:hover {
-    background-color: #5a6268;
+    background-color: #333;
 }
-
 /* Search and Sort Container */
 .search-sort {
     display: flex;
@@ -126,4 +96,13 @@
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
+}
+
+@media (max-width: 1236px) {
+    .main{
+        grid-template-columns: repeat(3,1fr);
+        transition: all .3s ease-in-out;
+    }
+
+
 }

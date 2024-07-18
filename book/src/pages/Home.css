@@ -2,13 +2,13 @@
     position: relative;
     z-index: 1;
     margin: 0 auto;
-    max-width: 1400px;
+    max-width: 1500px;
     /* background-color: #EEEEEE; */
 }
 
 
 .mainHeader{
-    max-width: 1400px;
+    max-width: 1500px;
     /* background-color: #fff; */
     margin: 0em auto;
     /* padding: 2em ; */
@@ -19,7 +19,7 @@
     margin: -3em 0;
     background-color: #fff;
     display: flex;
-    padding: 2em;
+    padding: 1em;
     align-items: center;
     justify-content: space-between;
     border-top-left-radius: 30px;
@@ -29,17 +29,48 @@
 
 .mainHeader-col2{
     display: flex;
-    gap: 20px;
+    box-shadow: 0 0 8px 5px #F73A40;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
 
+.mainHeader-col2 li{
+    background-color: #4ea4ff !important;
+    padding: 1em 0;
+    transition: all .3s ease-in-out;
+
+}
+
+.mainHeader-col2 li:first-child{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.mainHeader-col2 li:last-child{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.mainHeader-col2 li a{
+    padding: 1em;
+    /* border: 1px solid; */
+}
+
+
+
+.mainHeader-col2 li:hover{
+    background-color: #D62A50 !important;
+    transition: all .3s ease-in-out;
 }
 
 .Container{
     margin-top: 2em;
     display: flex;
-    padding: 2em;
+    padding: 1em;
     background-color: #fff;
     align-items:flex-start;
-    gap: 40px;
+    gap: 20px;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
 }
@@ -71,6 +102,7 @@
     display: grid !important;
     grid-template-columns: repeat(4,1fr);
     row-gap: 30px !important;
+    transition:    grid-template-columns .3s ease-in-out;
 }
 
 .wishList{
@@ -96,14 +128,6 @@
     margin:0
 }
 
-.Content{
-    display: grid;
-    align-items: center;
-    justify-content: space-between;
-}
-.Content li {
-     height: 100%;
-}
 
 .wrap{
     grid-row: 1/3;
@@ -121,6 +145,7 @@
 
 .book-item{
     position: relative;
+
 }
 .wishIcon{
     position: absolute;

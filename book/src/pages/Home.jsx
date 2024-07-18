@@ -115,8 +115,6 @@ const Home = ({ limit = 8, one = 1, six = 4, slides, book }) => {
                       addToWishlist={addToWishlist}
                       getImage={getImage}
                     >
-                      <h2 slot="header">{book.title}</h2>
-                      <p slot="content">Author: {book.author}</p>
                     </Cards>
                   ))}
                 </ul>

@@ -25,7 +25,7 @@ const BookList = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       const booksCollection = collection(db, "books");
-      const booksQuery = query(booksCollection, orderBy(sortType, sortOrder)); // Запитване за сортиране по дата на качване
+      const booksQuery = query(booksCollection, orderBy(sortType, sortOrder)); 
       const booksSnapshot = await getDocs(booksQuery);
       const booksList = booksSnapshot.docs.map((doc) => ({
         ...doc.data(),
@@ -50,7 +50,7 @@ const BookList = () => {
   };
 
   const filteredBooks = books.filter((book) =>
-    book.title.toLowerCase().includes(searchTerm.toLowerCase())
+    book.title ? book.title.toLowerCase().includes(searchTerm.toLowerCase()):false
   );
   return (
     <div>

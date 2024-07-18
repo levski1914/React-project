@@ -13,6 +13,7 @@ import { WishlistProvider } from "./pages/WishContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
+import "react-alice-carousel/lib/alice-carousel.css"
 
 // import your icons
 import { fab } from "@fortawesome/free-brands-svg-icons";

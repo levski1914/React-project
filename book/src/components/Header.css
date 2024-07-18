@@ -1,101 +1,108 @@
+/* Основни стилове за хедъра */
 .header {
-  background-color: #ff6f61;
-  padding: 20px 0;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color:#4173A8 ;
+  color: #fff;
+  padding: 10px 20px;
 }
 
 .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  flex-wrap: wrap;
 }
 
 .logo {
-  font-size: 24px;
+  font-size: 1.5em;
   font-weight: bold;
-  color: #fff;
 }
 
 .search {
   display: flex;
-  align-items: center;
   gap: 10px;
+  align-items: center;
+  margin-top: 10px;
 }
 
-.search input[type="text"] {
-  padding: 10px;
-  border: none;
+.search input, .search select, .search button {
+  padding: 8px;
   border-radius: 5px;
+  border: none;
+}
+
+.search input {
   width: 200px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.search select {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .search button {
-  padding: 10px 20px;
-  background-color: #ffdd57;
-  border: none;
-  border-radius: 5px;
+  background-color: #ffc107;
+  color: #000;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.search button:hover {
-  background-color: #ffcc00;
 }
 
 .prof {
   display: flex;
-  align-items: center;
   gap: 15px;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .prof li {
   list-style: none;
 }
 
-.prof a {
-  color: #fff;
-  font-size: 18px;
-}
-
 .nav-links {
   display: flex;
-  gap: 20px;
-}
-
-.nav-links li {
-  list-style: none;
+  gap: 15px;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .nav-links a {
   color: #fff;
-  font-size: 18px;
   text-decoration: none;
-  transition: color 0.3s ease;
+  font-size: 1em;
 }
 
-.nav-links a:hover {
-  color: #ffdd57;
-}
-
-.header-part {
-  position: relative;
-  margin-top: -5px;
-}
-
-.header-part img {
+.header-part{
   width: 100%;
-  height: auto;
+}
+
+.header-part img{
+  width: 100%;
+  height: 500px;
   object-fit: cover;
-  display: block;
+  object-position: center;
+
+}
+
+/* Стилове за по-малки екрани */
+@media (max-width: 768px) {
+  .container {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .search {
+      width: 100%;
+      flex-direction: column;
+  }
+
+  .search input {
+      width: 100%;
+  }
+
+  .prof {
+      width: 100%;
+      justify-content: space-between;
+  }
+
+  .nav-links {
+      width: 100%;
+      justify-content: space-between;
+  }
+
+  .header-part img {
+      width: 100%;
+  }
 }

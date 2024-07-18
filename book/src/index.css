@@ -23,6 +23,10 @@
 }
 
 body{
-  background: linear-gradient(135deg, #ff6f61, #ff9a8b);
+  background: #4173A8
   
+}
+
+a{
+  color: #fff !important;
 }

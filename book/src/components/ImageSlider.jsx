@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { collection, query, orderBy, getDocs } from "firebase/firestore";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import AliceCarousel from 'react-alice-carousel';
 import "./ImageSlider.css";
 
 import Cards from "../pages/Cards";
 
 const ImageSlider = ({ book, addToWishlist, getImage }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  
   const [books, setBooks] = useState([]);
-  const slidesToShow = 5;
-  const slidesToScroll = 1;
+
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -25,47 +24,19 @@ const ImageSlider = ({ book, addToWishlist, getImage }) => {
     };
     fetchBooks();
   }, []);
-
-  const goToNext = () => {
-    const newIndex = (currentIndex + slidesToScroll) % books.length;
-    setCurrentIndex(newIndex);
-  };
-
-  const goToPrevious = () => {
-    const newIndex =
-      (currentIndex - slidesToScroll + books.length) % books.length;
-    setCurrentIndex(newIndex);
-  };
-
-  const getSlidesToShow = () => {
-    const slides = [];
-    for (let i = 0; i < slidesToShow; i++) {
-      const index = (currentIndex + i) % books.length;
-      if (books[index]) {
-        slides.push(books[index]);
-      }
-    }
-    return slides;
-  };
+  const handleDragStart=(e)=>e.preventDefault();
 
   return (
     <>
       <div className="slider-container">
-        <div className="controls">
-          <div className="slider-arrow left-arrow" onClick={goToPrevious}>
-            ❰
-          </div>
-          <div className="slider-arrow right-arrow" onClick={goToNext}>
-            ❱
-          </div>
-        </div>
         <div className="slider">
-          {getSlidesToShow().map((book, index) => (
+          {books.map((book, index) => (
             <Cards
               key={book.id}
               book={book}
               addToWishlist={addToWishlist}
               getImage={getImage}
+              onDragStart={handleDragStart}
             />
           ))}
         </div>

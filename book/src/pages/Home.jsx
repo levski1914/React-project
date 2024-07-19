@@ -8,6 +8,7 @@ import { useWishlist } from "./WishContext";
 import Cards from "./Cards";
 import ImageSlider from "../components/ImageSlider";
 import RatingStars from "../components/Rating";
+import Aside from "./Aside";
 const images = import.meta.glob("../assets/images/*.{png,jpg,jpeg,svg}", {
   eager: true,
 });
@@ -49,62 +50,10 @@ const Home = ({ limit = 8, one = 1, six = 4, slides, book }) => {
   return (
     <>
       <main className="mainContainer">
-        <div className="mainHeader">
-          <nav>
-            <div className="menuCategory">
-              <div className="toggle-cat-wrap">
-                <FontAwesomeIcon icon="fa-solid fa-bars-staggered" />
-              </div>
-              <ul></ul>
-            </div>
-
-            <ul className="mainHeader-col2">
-              <li>
-                <Link to="/">Blog</Link>
-              </li>
-              <li>
-                <Link to="/">Shop</Link>
-              </li>
-              <li>
-                <Link to="/">Most Popular</Link>
-              </li>
-              <li>
-                <Link to="/">New Arrival</Link>
-              </li>
-              <li>
-                <Link to="/">on Sale</Link>
-              </li>
-              <li>
-                <Link to="/">Contact us</Link>
-              </li>
-            </ul>
-            <section className="mainHeader-col3">
-              <div className="header-support">
-                <a href="#" className="btn-main-header">
-                  Order Your Book now
-                </a>
-              </div>
-            </section>
-          </nav>
-        </div>
-
+        <Aside />
         <div className="Container">
-          <div className="logIn">
-            <ul>
-              <li>
-                <FontAwesomeIcon icon="fa-solid fa-lock" />
-              </li>
-              <li>
-                <Link to="/wishlist">
-                  <FontAwesomeIcon icon="fa-regular fa-heart" />
-                  <span>({wishlistCount})</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
-          {/* <RatingStars bookId={books.id} initialRating={books.rating} /> */}
           <div className="mainArea">
-            <div className="primaryContent">
+
               <h2>All in one Book store</h2>
               <div className="Books">
                 <ul className="bookList main">
@@ -160,7 +109,7 @@ const Home = ({ limit = 8, one = 1, six = 4, slides, book }) => {
                   getImage={getImage}
                 />
               </section>
-            </div>
+     
           </div>
         </div>
       </main>

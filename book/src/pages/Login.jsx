@@ -71,13 +71,17 @@ const Login = () => {
               <Link to="/">
                 <span>
                   <img
-                    style={{ transform: "rotate(180deg)" }}
+                    style={{ transform: "rotate(180deg)", width: "20px" }}
                     src="../images/download (8).png"
                     alt=""
                   />
                 </span>{" "}
                 Back to homepage
               </Link>
+            </div>
+            <div className="text">
+              <p>After you log on, you can add or edit books</p>
+              <p>Just go to Manage books and click Edit buttons</p>
             </div>
           </div>
         </div>

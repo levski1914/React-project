@@ -4,7 +4,9 @@ import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
+import "./Login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -18,7 +20,7 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       toast.success("Login successful!");
-      navigate("/profile");
+      navigate("/");
     } catch (error) {
       setError(error.message);
       toast.error("Login failed: " + error.message);
@@ -27,27 +29,60 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-          required
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-    </div>
+    <>
+      <div className="loginPage">
+        <div className="loginHeader"></div>
+        <div className="loginMain">
+          <div className="loginBanner">
+            <img src="../../images/download (10).png" alt="" />
+            <h1>Book social network</h1>
+            <h2>To begin, enter your details</h2>
+          </div>
+          <div className="line"></div>
+          <div className="users">
+            <form className="inputs" onSubmit={handleLogin}>
+              <label htmlFor="email">Enter your email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+                required
+              />
+              <label htmlFor="password">Type your password</label>
+              <div className="submit">
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Password"
+                  required
+                />
+                <button type="submit"></button>
+              </div>
+            </form>
+            {error && <p style={{ color: "red" }}>{error}</p>}
+          </div>
+        </div>
+
+        <div className="loginFooter">
+          <div className="backControls">
+            <div className="back">
+              <Link to="/">
+                <span>
+                  <img
+                    style={{ transform: "rotate(180deg)" }}
+                    src="../images/download (8).png"
+                    alt=""
+                  />
+                </span>{" "}
+                Back to homepage
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 

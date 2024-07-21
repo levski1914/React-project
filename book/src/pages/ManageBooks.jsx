@@ -116,7 +116,7 @@ const ManageBooks = () => {
         {books.map((book) => (
           <li key={book.id}>
             {book.title} by {book.author}
-            {book.userId === currentUser.uid && ( // Условие за показване на бутоните за редактиране и изтриване
+            {book.userId === currentUser.uid && (
               <>
                 <button onClick={() => handleUpdateBook(book.id)}>Edit</button>
                 <button onClick={() => handleDeleteBook(book.id)}>

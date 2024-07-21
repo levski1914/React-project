@@ -2,7 +2,7 @@
 .header {
   background-color:#ECE9D8 ;
   color: #fff;
-
+  box-shadow: rgb(176, 176, 176) 0px -2px 3px -1px inset;
   /* padding: 10px 20px; */
 }
 
@@ -22,6 +22,9 @@
 .title-bar h1{
   color: #fff !important;
   padding: 0 1em;
+  display: flex;
+  gap: 10px;
+  align-items: center;
   font-family: 'Trebuchet MS', sans-serif;
 }
 
@@ -177,7 +180,7 @@
   bottom: 0;
   width: 1px ;
   height: 90%;
-  margin: 0 2px;
+  margin: 0 -6px;
   background-color: rgba(0, 0, 0, .2);
 }
 

@@ -1,3 +1,6 @@
+.book-page{
+    display: flex;
+}
 .bookList {
     display: flex;
     flex-wrap: wrap;
@@ -7,6 +10,7 @@
     justify-content: center; /* Подрежда елементите в центъра */
     gap: 30px; /* Разстояние между картите */
     transition: grid-template-columns 0.3s ease-in-out;
+    background-color: #fff;
 }
 
 .bookList li {

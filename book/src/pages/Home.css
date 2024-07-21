@@ -3,17 +3,17 @@
     z-index: 1;
     /* margin: 0 auto; */
     display: flex;
-    width: 100%;
+    width: 99.8%;
+    height: 100%;
     /* max-width: 99.8%; */
     flex: 1 1 0%;
     border-width: 0 1px 1px;
     border-style: solid;
-    border-color: rgba(0, 0, 0, .4)
+    border-color: rgba(0, 0, 0, .4);
     /* background-color: #EEEEEE; */
+   
 }
-.aside{
-    
-}
+
 .Container{
     display: flex;
     padding: 1em;
@@ -35,12 +35,7 @@
     color: #F73A40;
 }
 
-.mainArea{
-    padding: 2em;
-    background-color: #4ea4ff;
-    width: 100%;
-    border-radius: 20px;
-}
+
 
 .primaryContent{
     background-color: #fff;

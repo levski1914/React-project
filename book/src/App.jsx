@@ -38,6 +38,7 @@ function App() {
             <Route path="/wishlist" element={<WishList />} />
             <Route path="/logout" element={<Logout />} />
           </Routes>
+
           <Footer />
           <ToastContainer />
         </Router>

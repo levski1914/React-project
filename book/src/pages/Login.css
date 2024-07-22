@@ -72,13 +72,13 @@
 .users{
     padding: 5px 20px;
     width: 450px;
-    height: 155px;
+    height: 200px;
     background: linear-gradient(90deg, #084DA3 0%, #5A7EDC 100%);
     border-radius: 4px 0px 0px 4px;
     position: relative;
 }
 
-.users::after{
+.users::after,.register::after{
     content: "";
     background: linear-gradient(90deg, rgba(255, 255, 255, 0.6) 40%, rgba(255, 255, 255, 0) 100%);
     position: absolute;
@@ -90,7 +90,7 @@
     pointer-events: none;
     border-radius: 8px;
 }
-.users .inputs{
+.users .inputs, .register .inputs{
     display: flex;
     flex-direction: column;
     width: 200px;
@@ -111,7 +111,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    width: 70px;
+    width: 40px;
     border-radius: 8px;
     height: 40px;
 }
@@ -122,6 +122,7 @@
 
 .inputs input{
     height: 40px;
+    padding: 0 10px;
 }
 .loginFooter{
     width: 100%;
@@ -152,4 +153,13 @@
 
 .backControls .text p{
     color: #fff !important;
+}
+
+.register{
+    height: 250px;
+    padding: 5px 20px;
+    width: 450px;
+    background: linear-gradient(90deg, #084DA3 0%, #5A7EDC 100%);
+    border-radius: 4px 0px 0px 4px;
+    position: relative;
 }

@@ -6,7 +6,7 @@ import { setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AuthForm from "./AuthForm"
+import AuthForm from "./AuthForm";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -39,14 +39,14 @@ const Register = () => {
     }
   };
 
-  const fields=[
+  const fields = [
     {
       name: "name",
       type: "text",
       value: name,
       onChange: (e) => setName(e.target.value),
       placeholder: "Name",
-      label: "Enter your name"
+      label: "Enter your name",
     },
     {
       name: "email",
@@ -54,7 +54,7 @@ const Register = () => {
       value: email,
       onChange: (e) => setEmail(e.target.value),
       placeholder: "Email",
-      label: "Enter your email"
+      label: "Enter your email",
     },
     {
       name: "password",
@@ -62,11 +62,19 @@ const Register = () => {
       value: password,
       onChange: (e) => setPassword(e.target.value),
       placeholder: "Password",
-      label: "Type your password"
-    }
-  ]
+      label: "Type your password",
+    },
+  ];
 
-  return <AuthForm title="To register, enter your details" fields={fields} handleSubmit={handleRegister} buttonLabel="Register" />
+  return (
+    <AuthForm
+      title="To register, enter your details"
+      fields={fields}
+      handleSubmit={handleRegister}
+      buttonLabel="Register"
+      formClass="register"
+    />
+  );
 };
 
 export default Register;

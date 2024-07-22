@@ -1,7 +1,7 @@
 // src/components/AuthForm.js
 import React from "react";
 
-const AuthForm = ({ title, fields, handleSubmit, buttonLabel }) => {
+const AuthForm = ({ title, fields, handleSubmit, buttonLabel, formClass }) => {
   return (
     <div className="loginPage">
       <div className="loginHeader"></div>
@@ -12,7 +12,7 @@ const AuthForm = ({ title, fields, handleSubmit, buttonLabel }) => {
           <h2>{title}</h2>
         </div>
         <div className="line"></div>
-        <div className="users">
+        <div className={formClass}>
           <form className="inputs" onSubmit={handleSubmit}>
             {fields.map((field, index) => (
               <div key={index}>
@@ -27,7 +27,7 @@ const AuthForm = ({ title, fields, handleSubmit, buttonLabel }) => {
               </div>
             ))}
             <div className="submit">
-              <button type="submit">{buttonLabel}</button>
+              <button type="submit"></button>
             </div>
           </form>
         </div>

@@ -23,6 +23,7 @@ import Logout from "./pages/Logout";
 import ManageBooks from "./pages/ManageBooks";
 import WishList from "./pages/WishList";
 import Search from "./pages/Search";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -37,7 +38,15 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/books" element={<BookList />} />
             <Route path="/search" element={<Search />} />
-            <Route path="/manage-books" element={<ManageBooks />} />
+            <Route
+              path="/manage-books"
+              element={
+                <ProtectedRoute>
+                  <ManageBooks />
+                </ProtectedRoute>
+              }
+            />
+
             <Route path="/wishlist" element={<WishList />} />
             <Route path="/logout" element={<Logout />} />
           </Routes>

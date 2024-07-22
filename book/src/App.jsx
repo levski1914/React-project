@@ -22,6 +22,8 @@ import { far } from "@fortawesome/free-regular-svg-icons";
 import Logout from "./pages/Logout";
 import ManageBooks from "./pages/ManageBooks";
 import WishList from "./pages/WishList";
+import Search from "./pages/Search";
+
 function App() {
   return (
     <AuthProvider>
@@ -34,6 +36,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/books" element={<BookList />} />
+            <Route path="/search" element={<Search />} />
             <Route path="/manage-books" element={<ManageBooks />} />
             <Route path="/wishlist" element={<WishList />} />
             <Route path="/logout" element={<Logout />} />

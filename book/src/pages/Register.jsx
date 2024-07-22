@@ -6,6 +6,7 @@ import { setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AuthForm from "./AuthForm"
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -38,36 +39,34 @@ const Register = () => {
     }
   };
 
-  return (
-    <div>
-      <h1>Register</h1>
-      <form onSubmit={handleRegister}>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Name"
-          required
-        />
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-          required
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          required
-        />
-        <button type="submit">Register</button>
-      </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-    </div>
-  );
+  const fields=[
+    {
+      name: "name",
+      type: "text",
+      value: name,
+      onChange: (e) => setName(e.target.value),
+      placeholder: "Name",
+      label: "Enter your name"
+    },
+    {
+      name: "email",
+      type: "email",
+      value: email,
+      onChange: (e) => setEmail(e.target.value),
+      placeholder: "Email",
+      label: "Enter your email"
+    },
+    {
+      name: "password",
+      type: "password",
+      value: password,
+      onChange: (e) => setPassword(e.target.value),
+      placeholder: "Password",
+      label: "Type your password"
+    }
+  ]
+
+  return <AuthForm title="To register, enter your details" fields={fields} handleSubmit={handleRegister} buttonLabel="Register" />
 };
 
 export default Register;

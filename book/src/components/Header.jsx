@@ -72,7 +72,7 @@ const Header = () => {
               </li>
 
               <li>
-                <Link to="/">
+                <Link to="/search">
                   <img
                     src="../../images/download (3).png"
                     alt=""

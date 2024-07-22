@@ -29,25 +29,33 @@ const Login = () => {
     }
   };
 
-  const fields=[
+  const fields = [
     {
-      name:" email",
-      type:"email",
-      value:email,
-      onChange:(e)=>setEmail(e.target.value),
-      placeholder:"Email",
-      label:"Enter your email"
+      name: " email",
+      type: "email",
+      value: email,
+      onChange: (e) => setEmail(e.target.value),
+      placeholder: "Email",
+      label: "Enter your email",
     },
     {
-      name:"password",
-      type:"password",
-      value:password,
-      onChange:(e)=>setPassword(e.target.value),
-      placeholder:"Password",
-      label:"Type your password"
-    }
-  ]
-  return <AuthForm title="To begin, enter your details" fields={fields} handleSubmit={handleLogin} buttonLabel="Login" />
+      name: "password",
+      type: "password",
+      value: password,
+      onChange: (e) => setPassword(e.target.value),
+      placeholder: "Password",
+      label: "Type your password",
+    },
+  ];
+  return (
+    <AuthForm
+      title="To begin, enter your details"
+      fields={fields}
+      handleSubmit={handleLogin}
+      buttonLabel="Login"
+      formClass="users"
+    />
+  );
 };
 
 export default Login;

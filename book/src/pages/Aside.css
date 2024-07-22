@@ -56,3 +56,8 @@
     cursor: pointer;
     text-decoration: underline;
 }
+
+.aside-card-main h2{
+    color: #000 !important;
+    font-size: 1em;
+}

@@ -1,86 +1,113 @@
-import React, { useState } from "react";
-import Aside from "./Aside";
+import React, { useEffect, useState } from "react";
+import { db } from "../firebase";
+import { collection, query, getDocs } from "firebase/firestore";
 import { Link } from "react-router-dom";
-import './Search.css'
-import { fetchBooksQuery } from "../Helpers";
+import "./Search.css";
 import RatingStars from "../components/Rating";
 import { useWishlist } from "./WishContext";
 const images = import.meta.glob("../assets/images/*.{png,jpg,jpeg,svg}", {
-    eager: true,
-  });
-  
-  const getImage = (imageName) => {
-    const matchedImage = Object.keys(images).find((key) =>
-      key.includes(imageName)
-    );
-    return matchedImage ? images[matchedImage].default : null;
-  };
-  
+  eager: true,
+});
+
+const getImage = (imageName) => {
+  const matchedImage = Object.keys(images).find((key) =>
+    key.includes(imageName)
+  );
+  return matchedImage ? images[matchedImage].default : null;
+};
 
 const Search = () => {
-    const [books,setBooks]=useState([]);
-    const [searchTerm,setSearchTerm]=useState("");
-    const { addToWishlist } = useWishlist();
-    const handleSearch=books.filter((book)=>book.title?book.title.toLowerCase().includes(searchTerm.toLowerCase()):false)
+  const [books, setBooks] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredBooks, setFilteredBooks] = useState([]);
+  const { addToWishlist } = useWishlist();
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      const booksCollection = collection(db, "books");
+      const booksSnapshot = await getDocs(booksCollection);
+      const booksList = booksSnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setBooks(booksList);
+    };
+
+    fetchBooks();
+  }, []);
+
+  const handleSearch = () => {
+    const filtered = books.filter((book) =>
+      book.title
+        ? book.title.toLowerCase().includes(searchTerm.toLowerCase())
+        : false
+    );
+    setFilteredBooks(filtered);
+  };
   return (
     <>
-    <div className="Search">
-
-      <div className="aside search">
-        <article className="aside-cards">
-          <div className="aside-card-main">
-            <h2>Search by any or all of the criteria below. </h2>
-            <div className="search-input">
+      <div className="Search">
+        <div className="aside search">
+          <article className="aside-cards">
+            <div className="aside-card-main">
+              <h2>Search by any or all of the criteria below. </h2>
+              <div className="search-input">
                 <h3>All or part of the book name:</h3>
-              <input type="text" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)}  />
-            </div>
-            <div className="btns">
+                <input
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="btns">
                 <div className="back btn">
-                    <Link to="/">
-                        Back
-                    </Link>
+                  <Link to="/">Back</Link>
                 </div>
                 <div className="srch btn">
-                    <button onClick={handleSearch}>
-                        Search
-
-                    </button>
-                    
-                </div>
-            </div>
-          </div>
-        </article>
-        <img style={{width:"100px",height:"100px"}} src="../../images/Image_29.webp" alt="" />
-      </div>
-      <div className="searchPlace">
-        {handleSearch.map((book)=(
-              <li key={book.id}>
-              <img src={getImage(books.imageLink)} alt={books.title} />
-              <div className="bookDetails">
-                <h2>{book.title}</h2>
-                <p>Author: {books.author}</p>
-                <p>Pages: {books.pages}</p>
-                <p>Language: {books.language}</p>
-                <p>Year: {books.year}</p>
-                <a href={books.link}>More info</a>
-
-                <div className="button">
-                  <button onClick={() => addToWishlist(books)}>
-                    Add to Wishlist
-                  </button>
-                  <RatingStars bookId={books.id} initialRating={books.rating} />
+                  <button onClick={handleSearch}>Search</button>
                 </div>
               </div>
-            </li>
-        ))}
+            </div>
+          </article>
+          <img
+            style={{ width: "100px", height: "100px" }}
+            src="../../images/Image_29.webp"
+            alt=""
+          />
+        </div>
+        <div className="searchPlace">
+          <ul className="bookList">
+            {filteredBooks.map((book) => (
+              <li key={book.id}>
+                <img src={getImage(book.imageLink)} alt={book.title} />
+                <div className="bookDetails">
+                  <h2>{book.title}</h2>
+                  <p>Author: {book.author}</p>
+                  <p>Pages: {book.pages}</p>
+                  <p>Language: {book.language}</p>
+                  <p>Year: {book.year}</p>
+                  <a href={book.link}>More info</a>
 
+                  <div className="button">
+                    <button onClick={() => addToWishlist(book)}>
+                      Add to Wishlist
+                    </button>
+                    <RatingStars bookId={book.id} initialRating={book.rating} />
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
 
-
-        <div className="watermark">
-            <img src="../../images/Windows Icons - PNG/shell32.dll_14_23-8.png" alt="" />
+          <div className="watermark">
+            <img
+              src="../../images/Windows Icons - PNG/shell32.dll_14_23-8.png"
+              alt=""
+            />
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 };

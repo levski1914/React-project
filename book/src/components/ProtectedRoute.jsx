@@ -15,8 +15,9 @@ const ProtectedRoute = ({ children }) => {
   }, [currentUser, notified]);
 
   if (!currentUser) {
-    return <Navigate to="/register" replace />;
+    return <Navigate to="/login" replace />;
   }
+
   return children;
 };
 

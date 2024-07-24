@@ -21,7 +21,7 @@ const Header = () => {
         </div>
         <div className="under-title">
           <ul>
-            <li>
+            <li className="profile">
               Profile
               <div className="semiMenu">
                 {currentUser ? (

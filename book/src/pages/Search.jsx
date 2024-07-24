@@ -57,16 +57,16 @@ const Search = () => {
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  required
+    
                 />
               </div>
               <div className="btns">
                 <div className="back btn">
                   <Link to="/">Back</Link>
                 </div>
-                <div className="srch btn">
-                  <button onClick={handleSearch}>Search</button>
-                </div>
+                <button className="srch btn" onClick={handleSearch}>
+                 Search
+                </button>
               </div>
             </div>
           </article>

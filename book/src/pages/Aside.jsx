@@ -3,7 +3,7 @@ import "./Aside.css";
 import { Link } from "react-router-dom";
 import { useWishlist } from "./WishContext";
 import { useAuth } from "../Authcontext";
-const Aside = () => {
+const Aside = ({ handleTabClick }) => {
   const { wishlistCount } = useWishlist();
   const { addToWishlist } = useWishlist();
   const { currentUser } = useAuth();
@@ -51,11 +51,15 @@ const Aside = () => {
               src="../../images/Windows icons - PNG/rundll32.exe_14_100-4.png"
               alt=""
             />
-            <Link to="/manage-books">All in one store</Link>
+            <Link to="/" onClick={() => handleTabClick("allInOne")}>
+              All in one store
+            </Link>
           </div>
           <div className="aside-row">
             <img src="../../images/download (6).png" alt="" />
-            <Link to="/">Today's deal</Link>
+            <Link to="/" onClick={() => handleTabClick("todaysDeal")}>
+              Today's deal
+            </Link>
           </div>
           <div className="aside-row">
             <img src="../../images/download (6).png" alt="" />

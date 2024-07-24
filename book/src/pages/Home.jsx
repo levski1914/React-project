@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { act, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Home.css";
@@ -22,6 +22,8 @@ const Home = ({ limit = 8, one = 1, six = 4, slides, book }) => {
   const { wishlistCount } = useWishlist();
   const [books, setBooks] = useState([]);
   const { addToWishlist } = useWishlist();
+  const [activeTab, setActiveTab] = useState("allInOne");
+
   useEffect(() => {
     const fetchBooks = async () => {
       const booksCollection = collection(db, "books");
@@ -48,57 +50,64 @@ const Home = ({ limit = 8, one = 1, six = 4, slides, book }) => {
   return (
     <>
       <main className="mainContainer">
-        <Aside />
+        <Aside handleTabClick={setActiveTab} />
         <div className="Container">
           <div className="mainArea">
-            <h2>All in one Book store</h2>
-            <div className="Books">
-              <ul className="bookList main">
-                {displayedBooks.map((book) => (
-                  <Cards
-                    key={book.id}
-                    book={book}
-                    addToWishlist={addToWishlist}
-                    getImage={getImage}
-                  ></Cards>
-                ))}
-              </ul>
-            </div>
-            <section className="Today">
-              <h2>Today's deal</h2>
-              <div className="Content">
-                <div className="tabContent">
-                  <ul className="bookList today">
-                    {todayDeal.map((book) => (
+            {activeTab === "allInOne" && (
+              <>
+                <h2>All in one Book store</h2>
+                <div className="Books">
+                  <ul className="main">
+                    {displayedBooks.map((book) => (
                       <Cards
                         key={book.id}
                         book={book}
                         addToWishlist={addToWishlist}
                         getImage={getImage}
-                      />
+                      ></Cards>
                     ))}
-                    {OneBook.map(
-                      (book) =>
-                        book && (
-                          <li key={book.id} className="wrap">
-                            <img src={getImage(book.imageLink)} alt="" />
-                            <div className="bookDetails">
-                              <h2>{book.title}</h2>
-                              <span
-                                onClick={() => addToWishlist(book)}
-                                className="wishIcon"
-                              >
-                                <FontAwesomeIcon icon="fa-regular fa-heart" />
-                              </span>
-                            </div>
-                          </li>
-                        )
-                    )}
                   </ul>
                 </div>
-              </div>
-            </section>
-          
+              </>
+            )}
+            {activeTab === "todaysDeal" && (
+              <>
+                <section className="Today">
+                  <h2>Today's deal</h2>
+                  <div className="Content">
+                    <div className="tabContent">
+                      <ul className="today">
+                        {todayDeal.map((book) => (
+                          <Cards
+                            key={book.id}
+                            book={book}
+                            addToWishlist={addToWishlist}
+                            getImage={getImage}
+                          />
+                        ))}
+                        {OneBook.map(
+                          (book) =>
+                            book && (
+                              <li key={book.id} className="wrap">
+                                <img src={getImage(book.imageLink)} alt="" />
+                                <div className="bookDetails">
+                                  <h2>{book.title}</h2>
+                                  <span
+                                    onClick={() => addToWishlist(book)}
+                                    className="wishIcon"
+                                  >
+                                    <FontAwesomeIcon icon="fa-regular fa-heart" />
+                                  </span>
+                                </div>
+                              </li>
+                            )
+                        )}
+                      </ul>
+                    </div>
+                  </div>
+                </section>
+              </>
+            )}
           </div>
         </div>
       </main>

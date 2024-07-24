@@ -112,6 +112,11 @@
         grid-template-columns: repeat(3,1fr);
         transition: all .3s ease-in-out;
     }
-
+    .wrap{
+        display: none !important;
+    }
+    .today{
+        grid-template-columns: repeat(3,1fr);
+    }
 
 }

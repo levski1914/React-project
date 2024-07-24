@@ -6,8 +6,6 @@ import { db } from "../firebase";
 import { collection, query, orderBy, getDocs } from "firebase/firestore";
 import { useWishlist } from "./WishContext";
 import Cards from "./Cards";
-import ImageSlider from "../components/ImageSlider";
-import RatingStars from "../components/Rating";
 import Aside from "./Aside";
 const images = import.meta.glob("../assets/images/*.{png,jpg,jpeg,svg}", {
   eager: true,
@@ -100,13 +98,7 @@ const Home = ({ limit = 8, one = 1, six = 4, slides, book }) => {
                 </div>
               </div>
             </section>
-            <section className="populart">
-              <ImageSlider
-                books={books}
-                addToWishlist={addToWishlist}
-                getImage={getImage}
-              />
-            </section>
+          
           </div>
         </div>
       </main>

@@ -1,6 +1,6 @@
 .aside{
     width: 240px;
-    height: 100vh;
+    height: auto;
     background: linear-gradient(rgb(116, 138, 255) 0%, rgb(64, 87, 211) 100%);
     box-shadow: inset 2px -1px #00138c;
     padding: 10px;

@@ -1,8 +1,8 @@
 // src/AuthContext.js
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "./firebase";
+import { auth,db } from "./firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-
+import {doc,getDoc} from 'firebase/firestore'
 const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -14,8 +14,14 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if(user){
+        const userDoc=await getDoc(doc(db,"users",user.uid));
+        setCurrentUser({...user,name:userDoc.data().name})
+      }else{
+        setCurrentUser(null);
+
+      }
       setLoading(false);
     });
 

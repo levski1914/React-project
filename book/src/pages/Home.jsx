@@ -18,7 +18,7 @@ const getImage = (imageName) => {
   return matchedImage ? images[matchedImage].default : null;
 };
 
-const Home = ({ limit = 8, one = 1, six = 4, slides, book }) => {
+const Home = ({ limit = 8, one = 1, six = 4,}) => {
   const { wishlistCount } = useWishlist();
   const [books, setBooks] = useState([]);
   const { addToWishlist } = useWishlist();

@@ -7,6 +7,7 @@ import { collection, query, orderBy, getDocs } from "firebase/firestore";
 import { useWishlist } from "./WishContext";
 import Cards from "./Cards";
 import Aside from "./Aside";
+import { useAuth } from "../Authcontext";
 const images = import.meta.glob("../assets/images/*.{png,jpg,jpeg,svg}", {
   eager: true,
 });
@@ -18,7 +19,8 @@ const getImage = (imageName) => {
   return matchedImage ? images[matchedImage].default : null;
 };
 
-const Home = ({ limit = 8, one = 1, six = 4,}) => {
+const Home = ({ limit = 8, one = 1, six = 4}) => {
+  const {currentUser}=useAuth();
   const { wishlistCount } = useWishlist();
   const [books, setBooks] = useState([]);
   const { addToWishlist } = useWishlist();
@@ -64,6 +66,7 @@ const Home = ({ limit = 8, one = 1, six = 4,}) => {
                         book={book}
                         addToWishlist={addToWishlist}
                         getImage={getImage}
+                        currentUser={currentUser}
                       ></Cards>
                     ))}
                   </ul>
@@ -83,6 +86,7 @@ const Home = ({ limit = 8, one = 1, six = 4,}) => {
                             book={book}
                             addToWishlist={addToWishlist}
                             getImage={getImage}
+                            currentUser={currentUser}
                           />
                         ))}
                         {OneBook.map(

@@ -3,8 +3,9 @@ import React, { useRef, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Card.css";
 import RatingStars from "../components/Rating";
+import { useAuth } from "../Authcontext";
 
-const Cards = ({ book, addToWishlist, getImage,currentUser }) => {
+const Cards = ({ book, addToWishlist, getImage }) => {
   const cardRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [mousePosition, setMousePosition] = useState({ mouseX: 0, mouseY: 0 });
@@ -13,6 +14,7 @@ const Cards = ({ book, addToWishlist, getImage,currentUser }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [likes, setLikes] = useState({});
+  const {currentUser}=useAuth();
 
   useEffect(() => {
     const card = cardRef.current;
@@ -65,6 +67,9 @@ const Cards = ({ book, addToWishlist, getImage,currentUser }) => {
     }));
   };
 
+  const handleDelete = (commentId) => {
+    setComments((prevComments) => prevComments.filter(comment => comment.id !== commentId));
+  };
   const { width, height } = dimensions;
   const { mouseX, mouseY } = mousePosition;
 
@@ -109,11 +114,16 @@ const Cards = ({ book, addToWishlist, getImage,currentUser }) => {
               <h4>{comment.user}</h4>
               <h5>
                 Posted: {Math.floor((new Date()-comment.timestamp)/60000)} min ago
-                <span onClick={()=>handleLike(comment.id)}>
+                <span style={{paddingLeft:"10px"}} onClick={()=>handleLike(comment.id)}>
               
                   <FontAwesomeIcon icon="fa-regular fa-thumbs-up" />
                 </span>
                   <span>{likes[comment.id]||0}</span>
+                  {currentUser && currentUser.uid === comment.userId && (
+                      <span style={{ paddingLeft: "10px" }} onClick={() => handleDelete(comment.id)}>
+                        <FontAwesomeIcon icon="fa-solid fa-trash" />
+                      </span>
+                    )}
               </h5>
             </div>
             <div className="comment-body">

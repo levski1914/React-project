@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Card.css";
 import RatingStars from "../components/Rating";
 
-const Cards = ({ book, addToWishlist, getImage }) => {
+const Cards = ({ book, addToWishlist, getImage,currentUser }) => {
   const cardRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [mousePosition, setMousePosition] = useState({ mouseX: 0, mouseY: 0 });
@@ -103,42 +103,31 @@ const Cards = ({ book, addToWishlist, getImage }) => {
 
         <div className={`comments ${showComments ? "show" : ""}`}>
           <ul className="comment-list">
-            {comments.map(())
+            {comments.map((comment)=>(
+            <li key={comment.id} className="comment">
+            <div className="comment-header">
+              <h4>{comment.user}</h4>
+              <h5>
+                Posted: {Math.floor((new Date()-comment.timestamp)/60000)} min ago
+                <span onClick={()=>handleLike(comment.id)}>
+              
+                  <FontAwesomeIcon icon="fa-regular fa-thumbs-up" />
+                </span>
+                  <span>{likes[comment.id]||0}</span>
+              </h5>
+            </div>
+            <div className="comment-body">
+                  {comment.text}
+            </div>
+            
+            </li>
+            ))
 
             }
-            <li className="comment">
-              <div className="comment-header">
-                <h4>User</h4>
-                <h5>
-                  Posted: 2min{" "}
-                  <span>
-                    {" "}
-                    <FontAwesomeIcon icon="fa-regular fa-thumbs-up" />
-                  </span>{" "}
-                  <span>
-                    {" "}
-                    <FontAwesomeIcon icon="fa-regular fa-thumbs-up" />
-                  </span>{" "}
-                </h5>
-              </div>
-              <div className="comment-body">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et,
-                repellendus.
-              </div>
-              <div className="likes">
-                <ul className="icons">
-                  <li className="like-btn">
-                    <FontAwesomeIcon icon="fa-regular fa-thumbs-up" />
-                  </li>
-                  <li className="like-btn">
-                    <FontAwesomeIcon icon="fa-regular fa-thumbs-down" />
-                  </li>
-                </ul>
-              </div>
-            </li>
+           
           </ul>
-          <form className="send">
-            <input type="text" placeholder="Type your comment here" />
+          <form className="send" onSubmit={handleCommentsSubmit}>
+            <input type="text" value={newComment} onChange={(e)=>setNewComment(e.target.value)} placeholder="Type your comment here" />
             <button type="submit"> send</button>
           </form>
         </div>

@@ -3,8 +3,9 @@ import React, { useRef, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Card.css";
 import RatingStars from "../components/Rating";
+import { useAuth } from "../Authcontext";
 
-const Cards = ({ book, addToWishlist, getImage, currentUser }) => {
+const Cards = ({ book, addToWishlist, getImage }) => {
   const cardRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [mousePosition, setMousePosition] = useState({ mouseX: 0, mouseY: 0 });
@@ -13,7 +14,7 @@ const Cards = ({ book, addToWishlist, getImage, currentUser }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [likes, setLikes] = useState({});
-
+  const { currentUser } = useAuth();
   useEffect(() => {
     const card = cardRef.current;
     const updateDimensions = () => {

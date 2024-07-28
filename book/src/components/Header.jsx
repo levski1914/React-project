@@ -102,33 +102,6 @@ const Header = () => {
               </li>
             </ul>
           </nav>
-
-          {/* <section className="search">
-            <input type="text" />
-            <select name="types" id="types">
-              <option value="Type">Book type</option>
-              <option value="Audio">Audio book</option>
-              <option value="E-book">E-book</option>
-              <option value="Paper">Paper book</option>
-            </select>
-            <button>Search</button>
-          </section> */}
-          <ul className="prof">
-            {currentUser ? (
-              <></>
-            ) : (
-              <>
-                <li>
-                  <Link to="/login">
-                    <FontAwesomeIcon icon="fa-solid fa-right-to-bracket" />{" "}
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/register">Register</Link>
-                </li>
-              </>
-            )}
-          </ul>
         </div>
       </header>
     </>

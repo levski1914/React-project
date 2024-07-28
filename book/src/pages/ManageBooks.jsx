@@ -1,6 +1,6 @@
 // src/pages/ManageBooks.js
 import React, { useState, useEffect } from "react";
-import { db } from "../firebase";
+import { db, storage } from "../firebase";
 import {
   collection,
   addDoc,
@@ -10,13 +10,14 @@ import {
   doc,
   serverTimestamp,
 } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useAuth } from "../Authcontext";
-import booksData from "../books.json";
 
 const ManageBooks = () => {
   const [books, setBooks] = useState([]);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
+  const [image, setImage] = useState(null);
   const { currentUser } = useAuth();
 
   useEffect(() => {
@@ -36,51 +37,51 @@ const ManageBooks = () => {
   const handleAddBook = async (e) => {
     e.preventDefault();
     try {
+      let imageUrl = "";
+      if (image) {
+        const imageRef = ref(storage, `book-images/${image.name}`);
+        await uploadBytes(imageRef, image);
+        imageUrl = await getDownloadURL(imageRef);
+      }
       const docRef = await addDoc(collection(db, "books"), {
         title,
         author,
+        imageUrl,
         userId: currentUser.uid,
         createdAt: serverTimestamp(),
       });
       setBooks([
         ...books,
-        { id: docRef.id, title, author, userId: currentUser.uid },
+        {
+          id: docRef.id,
+          title,
+          author,
+          imageUrl,
+          userId: currentUser.uid,
+        },
       ]);
       setTitle("");
       setAuthor("");
+      setImage(null);
     } catch (error) {
       console.error("Error adding book: ", error);
     }
   };
-
-  // const handleAddBooksFromJson = async () => {
-  //   try {
-  //     const booksCollection = collection(db, "books");
-  //     for (const book of booksData) {
-  //       await addDoc(booksCollection, {
-  //         ...book,
-  //         createdAt: serverTimestamp(),
-  //       });
-  //     }
-  //     const booksSnapshot = await getDocs(booksCollection);
-  //     const booksList = booksSnapshot.docs.map((doc) => ({
-  //       ...doc.data(),
-  //       id: doc.id,
-  //     }));
-  //     setBooks(booksList);
-  //   } catch (error) {
-  //     console.error("Error adding books from JSON: ", error);
-  //   }
-  // };
-
   const handleUpdateBook = async (id) => {
     const newTitle = prompt("Enter new title");
     const newAuthor = prompt("Enter new author");
+    const newImage = promt("Enter new Author");
     const bookDoc = doc(db, "books", id);
-    await updateDoc(bookDoc, { title: newTitle, author: newAuthor });
+    await updateDoc(bookDoc, {
+      title: newTitle,
+      author: newAuthor,
+      image: newImage,
+    });
     setBooks(
       books.map((book) =>
-        book.id === id ? { ...book, title: newTitle, author: newAuthor } : book
+        book.id === id
+          ? { ...book, title: newTitle, author: newAuthor, image: newImage }
+          : book
       )
     );
   };
@@ -109,13 +110,16 @@ const ManageBooks = () => {
           onChange={(e) => setAuthor(e.target.value)}
           required
         />
+        <input type="file" onChange={(e) => setImage(e.target.files[0])} />
+        {/* {image && <img src={URL.createObjectURL(image)} alt="Preview" />} */}
         <button type="submit">Add Book</button>
       </form>
-      {/* <button onClick={handleAddBooksFromJson}>Add Books from JSON</button> */}
+
       <ul>
         {books.map((book) => (
           <li key={book.id}>
             {book.title} by {book.author}
+            {book.image && <img src={book.image} alt={book.title} />}
             {book.userId === currentUser.uid && (
               <>
                 <button onClick={() => handleUpdateBook(book.id)}>Edit</button>

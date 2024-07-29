@@ -19,13 +19,21 @@ import "react-alice-carousel/lib/alice-carousel.css";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
+import { playClickSound } from "./audio";
 import Logout from "./pages/Logout";
 import ManageBooks from "./pages/ManageBooks";
 import WishList from "./pages/WishList";
 import Search from "./pages/Search";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    document.addEventListener("click", playClickSound);
+    return () => {
+      document.removeEventListener("click", playClickSound);
+    };
+  });
   return (
     <AuthProvider>
       <WishlistProvider>

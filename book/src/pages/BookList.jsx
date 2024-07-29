@@ -56,6 +56,7 @@ const BookList = () => {
       : false
   );
 
+  const showNoBooksMessage = searchTerm !== "" && filteredBooks.length === 0;
   return (
     <div className="book-page">
       <Aside />
@@ -79,31 +80,37 @@ const BookList = () => {
             <option value="asc">Ascending</option>
           </select>
         </div>
-        <ul className="bookList">
-          {filteredBooks.map((book) => (
-            <li key={book.id}>
-              <img
-                src={book.imageUrl || getImage(book.imageLink)}
-                alt={book.title}
-              />
-              <div className="bookDetails">
-                <h2>{book.title}</h2>
-                <p>Author: {book.author}</p>
-                <p>Pages: {book.pages}</p>
-                <p>Language: {book.language}</p>
-                <p>Year: {book.year}</p>
-                <a href={book.link}>More info</a>
+        {showNoBooksMessage ? (
+          <div className="noFound">
+            <h2>Book not found</h2>
+          </div>
+        ) : (
+          <ul className="bookList">
+            {filteredBooks.map((book) => (
+              <li key={book.id}>
+                <img
+                  src={book.imageUrl || getImage(book.imageLink)}
+                  alt={book.title}
+                />
+                <div className="bookDetails">
+                  <h2>{book.title}</h2>
+                  <p>Author: {book.author}</p>
+                  <p>Pages: {book.pages}</p>
+                  <p>Language: {book.language}</p>
+                  <p>Year: {book.year}</p>
+                  <a href={book.link}>More info</a>
 
-                <div className="button">
-                  <button onClick={() => addToWishlist(book)}>
-                    Add to Wishlist
-                  </button>
-                  <RatingStars bookId={book.id} initialRating={book.rating} />
+                  <div className="button">
+                    <button onClick={() => addToWishlist(book)}>
+                      Add to Wishlist
+                    </button>
+                    <RatingStars bookId={book.id} initialRating={book.rating} />
+                  </div>
                 </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

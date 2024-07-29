@@ -82,7 +82,10 @@ const BookList = () => {
         <ul className="bookList">
           {filteredBooks.map((book) => (
             <li key={book.id}>
-              <img src={getImage(book.imageLink)} alt={book.title} />
+              <img
+                src={book.imageUrl || getImage(book.imageLink)}
+                alt={book.title}
+              />
               <div className="bookDetails">
                 <h2>{book.title}</h2>
                 <p>Author: {book.author}</p>

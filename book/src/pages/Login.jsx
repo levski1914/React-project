@@ -24,7 +24,7 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       setError(error.message);
-      toast.error("Login failed: " + error.message);
+      toast.error("Login failed: wrong email/password ");
       console.error(error);
     }
   };

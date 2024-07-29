@@ -14,8 +14,7 @@ const Cards = ({ book, addToWishlist, getImage }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [likes, setLikes] = useState({});
-  const {currentUser}=useAuth();
-
+  const { currentUser } = useAuth();
   useEffect(() => {
     const card = cardRef.current;
     const updateDimensions = () => {
@@ -51,6 +50,7 @@ const Cards = ({ book, addToWishlist, getImage }) => {
     const comment = {
       id: comments.length + 1,
       user: currentUser ? currentUser.name : "User",
+      userId: currentUser ? currentUser.uid : null,
       text: newComment,
       timestamp: new Date(),
       likes: 0,
@@ -68,8 +68,11 @@ const Cards = ({ book, addToWishlist, getImage }) => {
   };
 
   const handleDelete = (commentId) => {
-    setComments((prevComments) => prevComments.filter(comment => comment.id !== commentId));
+    setComments((prevComment) =>
+      prevComment.filter((comment) => comment.id !== commentId)
+    );
   };
+
   const { width, height } = dimensions;
   const { mouseX, mouseY } = mousePosition;
 
@@ -84,7 +87,12 @@ const Cards = ({ book, addToWishlist, getImage }) => {
     transform: `translateX(${mousePX * -30}px) translateY(${mousePY * -30}px)`,
     backgroundImage: `url(${getImage(book.imageLink)})`,
   };
-
+  const getImageUrl = () => {
+    if (book.imageUrl) {
+      return book.imageUrl;
+    }
+    return getImage(book.imageLink);
+  };
   return (
     <div className={`card-container ${showComments ? "expanded" : ""}`}>
       <div
@@ -94,7 +102,7 @@ const Cards = ({ book, addToWishlist, getImage }) => {
         onMouseLeave={handleMouseLeave}
         style={cardStyle}
       >
-        <img src={getImage(book.imageLink)} alt={book.title} />
+        <img src={book.imageUrl || getImage(book.imageLink)} alt={book.title} />
         <div className="card-content">
           <h2>{book.title}</h2>
           <p>Author: {book.author}</p>
@@ -108,36 +116,39 @@ const Cards = ({ book, addToWishlist, getImage }) => {
 
         <div className={`comments ${showComments ? "show" : ""}`}>
           <ul className="comment-list">
-            {comments.map((comment)=>(
-            <li key={comment.id} className="comment">
-            <div className="comment-header">
-              <h4>{comment.user}</h4>
-              <h5>
-                Posted: {Math.floor((new Date()-comment.timestamp)/60000)} min ago
-                <span style={{paddingLeft:"10px"}} onClick={()=>handleLike(comment.id)}>
-              
-                  <FontAwesomeIcon icon="fa-regular fa-thumbs-up" />
-                </span>
-                  <span>{likes[comment.id]||0}</span>
-                  {currentUser && currentUser.uid === comment.userId && (
-                      <span style={{ paddingLeft: "10px" }} onClick={() => handleDelete(comment.id)}>
+            {comments.map((comment) => (
+              <li key={comment.id} className="comment">
+                <div className="comment-header">
+                  <h4>{comment.user}</h4>
+                  <h5>
+                    Posted:{" "}
+                    {Math.floor((new Date() - comment.timestamp) / 60000)} min
+                    ago
+                    <span onClick={() => handleLike(comment.id)}>
+                      <FontAwesomeIcon icon="fa-regular fa-thumbs-up" />
+                    </span>
+                    <span>{likes[comment.id] || 0}</span>
+                    {currentUser && comment.userId && (
+                      <span
+                        style={{ paddingLeft: "10px" }}
+                        onClick={() => handleDelete(comment.id)}
+                      >
                         <FontAwesomeIcon icon="fa-solid fa-trash" />
                       </span>
                     )}
-              </h5>
-            </div>
-            <div className="comment-body">
-                  {comment.text}
-            </div>
-            
-            </li>
-            ))
-
-            }
-           
+                  </h5>
+                </div>
+                <div className="comment-body">{comment.text}</div>
+              </li>
+            ))}
           </ul>
           <form className="send" onSubmit={handleCommentsSubmit}>
-            <input type="text" value={newComment} onChange={(e)=>setNewComment(e.target.value)} placeholder="Type your comment here" />
+            <input
+              type="text"
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Type your comment here"
+            />
             <button type="submit"> send</button>
           </form>
         </div>

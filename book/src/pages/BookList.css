@@ -1,5 +1,10 @@
 .book-page{
     display: flex;
+    height: auto;
+}
+.booklist{
+    width: 100%;
+
 }
 .bookList {
     display: flex;
@@ -11,8 +16,12 @@
     gap: 30px; /* Разстояние между картите */
     transition: grid-template-columns 0.3s ease-in-out;
     background-color: #fff;
-}
 
+}
+.Title{
+    text-align: center;
+    padding: 1em;
+}
 .bookList li {
     width: 330px;
     /* border: 1px solid; */
@@ -107,7 +116,11 @@
     border: 1px solid #ccc;
 }
 
-@media (max-width: 1263px) {
+.noFound{
+    height: 56.2vh;
+}
+
+@media (max-width: 1236px) {
     .main{
         grid-template-columns: repeat(3,1fr);
         transition: all .3s ease-in-out;

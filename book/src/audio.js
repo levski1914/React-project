@@ -1,0 +1,1 @@
+const clickSound = new Audio("../");

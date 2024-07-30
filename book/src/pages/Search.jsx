@@ -20,6 +20,7 @@ const Search = () => {
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredBooks, setFilteredBooks] = useState([]);
+  const [isSearchClicked,setIsSearchClicked]=useState(false)
   const { addToWishlist } = useWishlist();
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const Search = () => {
     fetchBooks();
   }, []);
 
+  
   const handleSearch = () => {
     const filtered = books.filter((book) =>
       book.title
@@ -43,7 +45,15 @@ const Search = () => {
         : false
     );
     setFilteredBooks(filtered);
+    setIsSearchClicked(true);
   };
+
+  const handleInputChange = (e) => {
+    setSearchTerm(e.target.value);
+    setIsSearchClicked(false);
+  };
+
+  const showNoFoundBooks = isSearchClicked && filteredBooks.length === 0;
   return (
     <>
       <div className="Search">
@@ -56,7 +66,7 @@ const Search = () => {
                 <input
                   type="text"
                   value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={handleInputChange}
     
                 />
               </div>
@@ -77,29 +87,38 @@ const Search = () => {
           />
         </div>
         <div className="searchPlace">
-          <ul className="bookList">
-            {filteredBooks.map((book) => (
-              <li key={book.id}>
-                <img src={getImage(book.imageLink)} alt={book.title} />
-                <div className="bookDetails">
-                  <h2>{book.title}</h2>
-                  <p>Author: {book.author}</p>
-                  <p>Pages: {book.pages}</p>
-                  <p>Language: {book.language}</p>
-                  <p>Year: {book.year}</p>
-                  <a href={book.link}>More info</a>
-
-                  <div className="button">
-                    <button onClick={() => addToWishlist(book)}>
-                      Add to Wishlist
-                    </button>
-                    <RatingStars bookId={book.id} initialRating={book.rating} />
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-
+            {
+              showNoFoundBooks?(
+                <div className="noFound">
+                <h2>Book not found</h2>
+              </div>
+              ):(
+                <ul className="bookList">
+                {filteredBooks.map((book) => (
+                  <li key={book.id}>
+                    <img src={getImage(book.imageLink)} alt={book.title} />
+                    <div className="bookDetails">
+                      <h2>{book.title}</h2>
+                      <p>Author: {book.author}</p>
+                      <p>Pages: {book.pages}</p>
+                      <p>Language: {book.language}</p>
+                      <p>Year: {book.year}</p>
+                      <a href={book.link}>More info</a>
+    
+                      <div className="button">
+                        <button onClick={() => addToWishlist(book)}>
+                          Add to Wishlist
+                        </button>
+                        <RatingStars bookId={book.id} initialRating={book.rating} />
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+    
+              )
+            }
+               
           <div className="watermark">
             <img
               src="../../images/Windows Icons - PNG/shell32.dll_14_23-8.png"

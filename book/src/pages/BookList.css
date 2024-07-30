@@ -107,7 +107,7 @@
     border: 1px solid #ccc;
 }
 
-@media (max-width: 1236px) {
+@media (max-width: 1263px) {
     .main{
         grid-template-columns: repeat(3,1fr);
         transition: all .3s ease-in-out;
@@ -116,7 +116,7 @@
         display: none !important;
     }
     .today{
-        grid-template-columns: repeat(3,1fr);
+        grid-template-columns: repeat(2,1fr);
     }
 
 }

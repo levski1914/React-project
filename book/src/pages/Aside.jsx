@@ -75,36 +75,7 @@ const Aside = ({ handleTabClick }) => {
           </div>
         </div>
       </article>
-      <article className="aside-cards">
-        <div className="aside-card-header">
-          <h2>Other places</h2>
-          <img src="../../images/download (5).png" alt="" />
-        </div>
-        <div className="aside-card-main">
-          <div className="aside-row">
-            <img
-              src="../../images/Windows icons - PNG/rundll32.exe_14_100-4.png"
-              alt=""
-            />
-            <Link to="/">Blog</Link>
-          </div>
-          <div className="aside-row">
-            <img src="../../images/download (6).png" alt="" />
-            <Link to="/manage-books">Popular books</Link>
-          </div>
-          <div className="aside-row">
-            <img src="../../images/download (7).png" alt="" />
-            <Link to="/manage-books">Categories</Link>
-          </div>
-          <div className="aside-row">
-            <img
-              src="../../images/Windows icons - PNG/shdoclc.dll_14_191-7.png"
-              alt=""
-            />
-            <Link to="/wishlist">Whishlist ({wishlistCount})</Link>
-          </div>
-        </div>
-      </article>
+
     </div>
   );
 };

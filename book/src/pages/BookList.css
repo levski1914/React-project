@@ -2,7 +2,7 @@
     display: flex;
     height: auto;
 }
-.booklist{
+.Booklist{
     width: 100%;
 
 }
@@ -129,7 +129,7 @@
         display: none !important;
     }
     .today{
-        grid-template-columns: repeat(3,1fr);
+        grid-template-columns: repeat(2,1fr);
     }
 
 }

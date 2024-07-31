@@ -19,8 +19,8 @@ const getTime = () => {
   return `${hour}:${min} ${hourPostFix}`;
 };
 
-const getDate = () => {
-  const date = new Date();
+const getDate = (month, year) => {
+  const date = new Date(year, month, 1);
   const monthNames = [
     "January",
     "February",
@@ -35,12 +35,19 @@ const getDate = () => {
     "November",
     "December",
   ];
+  const firstDay = date.getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
   return {
-    month: monthNames[date.getMonth()],
-    year: date.getFullYear(),
-    day: date.getDate(),
+    month: monthNames[month],
+    year: year,
+    day: new Date().getDate(),
+    firstDay,
+    daysInMonth,
+    monthNames,
   };
 };
+
+
 
 const setClockAngles = () => {
   const hourHand = document.querySelector(".hour");
@@ -66,7 +73,8 @@ const setClockAngles = () => {
 
 const Footer = () => {
   const [time, setTime] = useState(getTime);
-  const [date, setDate] = useState(getDate);
+  const [date, setDate] = useState(getDate(new Date().getMonth(), new Date().getFullYear()));
+  const [selectedDay, setSelectedDay] = useState(new Date().getDate());
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -84,12 +92,36 @@ const Footer = () => {
     }
   }, [isVisible]);
 
+
+
+  const handleMonthChange = (event) => {
+    const newMonth = event.target.value;
+    const monthIndex = date.monthNames.indexOf(newMonth);
+    setDate(getDate(monthIndex, date.year));
+  };
+
+  const handleYearChange = (event) => {
+    const newYear = parseInt(event.target.value, 10);
+    setDate(getDate(date.monthNames.indexOf(date.month), newYear));
+  };
+
+  const handleDayClick = (day) => {
+    setSelectedDay(day);
+  };
+
   const countDays = () => {
     const numbers = [];
-    for (let i = 0; i < 31; i++) {
+    for (let i = 0; i < date.firstDay; i++) {
+      numbers.push(<li key={`empty-${i}`}></li>);
+    }
+    for (let i = 1; i <= date.daysInMonth; i++) {
       numbers.push(
-        <li key={i} className="nums">
-          {[i + 1]}
+        <li
+          key={i}
+          className={`nums ${i === selectedDay ? "selected" : ""}`}
+          onClick={() => handleDayClick(i)}
+        >
+          {i}
         </li>
       );
     }
@@ -153,22 +185,21 @@ const Footer = () => {
                         <select
                           name="month"
                           id="month"
-                          defaultValue={date.month}
+                          value={date.month}
+                          onChange={handleMonthChange}
                         >
-                          <option value="January">January</option>
-                          <option value="February">February</option>
-                          <option value="March">March</option>
-                          <option value="April">April</option>
-                          <option value="May">May</option>
-                          <option value="June">June</option>
-                          <option value="July">July</option>
-                          <option value="August">August</option>
-                          <option value="September">September</option>
-                          <option value="October">October</option>
-                          <option value="November">November</option>
-                          <option value="December">December</option>
+                          {date.monthNames.map((month, index) => (
+                            <option key={index} value={month}>
+                              {month}
+                            </option>
+                          ))}
                         </select>
-                        <select name="year" id="year" defaultValue={date.year}>
+                        <select
+                          name="year"
+                          id="year"
+                          value={date.year}
+                          onChange={handleYearChange}
+                        >
                           {Array.from({ length: 20 }, (_, i) => 2005 + i).map(
                             (year) => (
                               <option key={year} value={year}>
@@ -179,20 +210,16 @@ const Footer = () => {
                         </select>
                       </div>
                       <div className="calendar">
-                        <table>
-                          <thead>
-                            <tr>
-                              <th>Su</th>
-                              <th>Mo</th>
-                              <th>Tu</th>
-                              <th>We</th>
-                              <th>Th</th>
-                              <th>Fr</th>
-                              <th>Sa</th>
-                            </tr>
-                          </thead>
-                          <tbody>{countDays()}</tbody>
-                        </table>
+                        <ul className="day-list">
+                          <li>Su</li>
+                          <li>Mo</li>
+                          <li>Tu</li>
+                          <li>We</li>
+                          <li>Th</li>
+                          <li>Fr</li>
+                          <li>Sa</li>
+                        </ul>
+                        <ul className="date-list">{countDays()}</ul>
                       </div>
                     </fieldset>
                     <fieldset className="watch">

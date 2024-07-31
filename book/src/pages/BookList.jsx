@@ -75,7 +75,7 @@ const BookList = () => {
             <option value="author">Sort by Author</option>
           </select>
 
-          <select value={sortType} onChange={handleSortOrder}>
+          <select value={sortOrder} onChange={handleSortOrder}>
             <option value="desc">Descending</option>
             <option value="asc">Ascending</option>
           </select>

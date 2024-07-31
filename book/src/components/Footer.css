@@ -211,10 +211,10 @@
     user-select: none;
   }
   
-  .date-list .today {
+  .date-list .Today {
     background-color: #0046d5;
-    color: white;
-    border-radius: 50%;
+    color: white !important;
+    /* border-radius: 50%; */
   }
   
   .date-list .selected {

@@ -47,8 +47,6 @@ const getDate = (month, year) => {
   };
 };
 
-
-
 const setClockAngles = () => {
   const hourHand = document.querySelector(".hour");
   const minuteHand = document.querySelector(".minute");
@@ -88,11 +86,12 @@ const Footer = () => {
 
   useEffect(() => {
     if (isVisible) {
+      const currentDate = new Date();
+      setDate(getDate(currentDate.getMonth(), currentDate.getFullYear()));
+      setSelectedDay(currentDate.getDate());
       setClockAngles(); // Set clock angles when the window becomes visible
     }
   }, [isVisible]);
-
-
 
   const handleMonthChange = (event) => {
     const newMonth = event.target.value;
@@ -116,17 +115,15 @@ const Footer = () => {
     }
     for (let i = 1; i <= date.daysInMonth; i++) {
       numbers.push(
-        <li
-          key={i}
-          className={`nums ${i === selectedDay ? "selected" : ""}`}
-          onClick={() => handleDayClick(i)}
-        >
+        <li key={i} className={`nums ${i === selectedDay ? "Today" : ""}`} onClick={() => handleDayClick(i)}>
           {i}
         </li>
       );
     }
     return numbers;
   };
+
+
   const renderDialLines = () => {
     const lines = [];
     for (let i = 0; i < 60; i++) {

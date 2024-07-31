@@ -67,11 +67,17 @@ const Profile = ({onClose}) => {
     return <p>{error}</p>;
   }
 
+  const handleShowWarning=()=>{
+    const audio=document.getElementById("error-sound");
+    audio.play();
+    setShowWarning(true);
+  }
   const handleCloseEdit=()=>setEditMode(false);
   const handleCloseDelete=()=>setDeleteMode(false);
 
   return (
     <>
+     <audio id="error-sound" src="../../Windows XP Critical Stop.mp3" preload="auto"></audio>
           <div className="Profile">
       <Aside />
 
@@ -91,7 +97,7 @@ const Profile = ({onClose}) => {
             </Link></li>
           <li onClick={()=>setEditMode(true)}>
             <img src="../../images/Windows Icons - PNG/shell32.dll_14_325-5.png" alt="" /> <span>Edit an account</span></li>
-            <li onClick={() => setShowWarning(true)}>
+            <li onClick={handleShowWarning}>
                 <img src="../../images/Windows Icons - PNG/shell32.dll_14_32-7.png" alt="" /> 
                 <span>Delete an account</span>
               </li>

@@ -1,7 +1,7 @@
 // src/components/Card.js
 import React, { useRef, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./Card.css";
+import "./Styles/Card.css";
 import RatingStars from "../components/Rating";
 import { useAuth } from "../Authcontext";
 

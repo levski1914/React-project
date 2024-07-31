@@ -14,7 +14,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import "react-alice-carousel/lib/alice-carousel.css";
-
+import Game from "./Xp apps/minesweeper/minesweeper/src/Game";
 // import your icons
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -46,6 +46,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/books" element={<BookList />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/minesweeper" element={<Game />} />
             <Route
               path="/manage-books"
               element={

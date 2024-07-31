@@ -1,7 +1,7 @@
 import React, { act, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./Home.css";
+import "./Styles/Home.css";
 import { db } from "../firebase";
 import { collection, query, orderBy, getDocs } from "firebase/firestore";
 import { useWishlist } from "./WishContext";
@@ -19,8 +19,8 @@ const getImage = (imageName) => {
   return matchedImage ? images[matchedImage].default : null;
 };
 
-const Home = ({ limit = 8, one = 1, six = 4}) => {
-  const {currentUser}=useAuth();
+const Home = ({ limit = 8, one = 1, six = 4 }) => {
+  const { currentUser } = useAuth();
   const { wishlistCount } = useWishlist();
   const [books, setBooks] = useState([]);
   const { addToWishlist } = useWishlist();

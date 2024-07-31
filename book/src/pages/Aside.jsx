@@ -1,5 +1,5 @@
 import React from "react";
-import "./Aside.css";
+import "./Styles/Aside.css";
 import { Link } from "react-router-dom";
 import { useWishlist } from "./WishContext";
 import { useAuth } from "../Authcontext";
@@ -34,7 +34,10 @@ const Aside = ({ handleTabClick }) => {
                 <Link to="/manage-books">Manage books</Link>
               </div>
               <div className="aside-row">
-                <img src="../../images/Windows Icons - PNG/shell32.dll_14_269-4.png" alt="" />
+                <img
+                  src="../../images/Windows Icons - PNG/shell32.dll_14_269-4.png"
+                  alt=""
+                />
                 <Link to="/profile">User account</Link>
               </div>
             </div>
@@ -79,7 +82,6 @@ const Aside = ({ handleTabClick }) => {
           </div>
         </div>
       </article>
-
     </div>
   );
 };

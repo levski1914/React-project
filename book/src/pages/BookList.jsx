@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { collection, query, orderBy, getDocs } from "firebase/firestore";
 import { useWishlist } from "./WishContext";
-import "./BookList.css";
+import "./Styles/BookList.css";
 import RatingStars from "../components/Rating";
 import Aside from "./Aside";
 

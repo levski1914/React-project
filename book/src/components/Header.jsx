@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.css"; // Импортиране на CSS файла за стилове
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { useAuth } from "../Authcontext";
 const Header = () => {
   const { currentUser } = useAuth();
@@ -51,6 +51,9 @@ const Header = () => {
             <li>Tools</li>
             <li>Favorites</li>
             <li>Help</li>
+            <li>
+              <Link to="/minesweeper">Minesweeper</Link>
+            </li>
           </ul>
 
           <div className="logo">

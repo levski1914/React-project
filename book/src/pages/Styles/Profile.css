@@ -51,6 +51,7 @@
 
 .Tasks h1{
     color: #D7DBF6 !important;
+    
 }
 
 
@@ -65,6 +66,7 @@
     gap: 20px;
     cursor: pointer;
     color: #fff !important;
+    font-family: "Pixelated MS Sans Serif",Arial !important;
     /* justify-content: center; */
 }
 .Tasks ul li  a{
@@ -73,7 +75,7 @@
     align-content: center;
     gap: 20px;
     cursor: pointer;
-   
+    font-family: "Pixelated MS Sans Serif",Arial !important;
     /* justify-content: center; */
 }
 
@@ -165,6 +167,7 @@
 
 .warning-body p{
     font-size: .9em;
+    font-family: "Pixelated MS Sans Serif",Arial !important;
 }
 
 .warning-body button{
@@ -176,5 +179,6 @@
     justify-content: center;
     -webkit-box-align: center;
     align-items: center;
+    font-weight: bold;
     box-shadow: black -1px -1px 1px inset;
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { collection, query, getDocs } from "firebase/firestore";
 import { Link } from "react-router-dom";
-import "./Search.css";
+import "./Styles/Search.css";
 import RatingStars from "../components/Rating";
 import { useWishlist } from "./WishContext";
 const images = import.meta.glob("../assets/images/*.{png,jpg,jpeg,svg}", {
@@ -20,7 +20,7 @@ const Search = () => {
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredBooks, setFilteredBooks] = useState([]);
-  const [isSearchClicked,setIsSearchClicked]=useState(false)
+  const [isSearchClicked, setIsSearchClicked] = useState(false);
   const { addToWishlist } = useWishlist();
 
   useEffect(() => {
@@ -37,7 +37,6 @@ const Search = () => {
     fetchBooks();
   }, []);
 
-  
   const handleSearch = () => {
     const filtered = books.filter((book) =>
       book.title
@@ -66,8 +65,7 @@ const Search = () => {
                 <input
                   type="text"
                   value={searchTerm}
-                onChange={handleInputChange}
-    
+                  onChange={handleInputChange}
                 />
               </div>
               <div className="btns">
@@ -75,7 +73,7 @@ const Search = () => {
                   <Link to="/">Back</Link>
                 </div>
                 <button className="srch btn" onClick={handleSearch}>
-                 Search
+                  Search
                 </button>
               </div>
             </div>
@@ -87,38 +85,38 @@ const Search = () => {
           />
         </div>
         <div className="searchPlace">
-            {
-              showNoFoundBooks?(
-                <div className="noFound">
-                <h2>Book not found</h2>
-              </div>
-              ):(
-                <ul className="bookList">
-                {filteredBooks.map((book) => (
-                  <li key={book.id}>
-                    <img src={getImage(book.imageLink)} alt={book.title} />
-                    <div className="bookDetails">
-                      <h2>{book.title}</h2>
-                      <p>Author: {book.author}</p>
-                      <p>Pages: {book.pages}</p>
-                      <p>Language: {book.language}</p>
-                      <p>Year: {book.year}</p>
-                      <a href={book.link}>More info</a>
-    
-                      <div className="button">
-                        <button onClick={() => addToWishlist(book)}>
-                          Add to Wishlist
-                        </button>
-                        <RatingStars bookId={book.id} initialRating={book.rating} />
-                      </div>
+          {showNoFoundBooks ? (
+            <div className="noFound">
+              <h2>Book not found</h2>
+            </div>
+          ) : (
+            <ul className="bookList">
+              {filteredBooks.map((book) => (
+                <li key={book.id}>
+                  <img src={getImage(book.imageLink)} alt={book.title} />
+                  <div className="bookDetails">
+                    <h2>{book.title}</h2>
+                    <p>Author: {book.author}</p>
+                    <p>Pages: {book.pages}</p>
+                    <p>Language: {book.language}</p>
+                    <p>Year: {book.year}</p>
+                    <a href={book.link}>More info</a>
+
+                    <div className="button">
+                      <button onClick={() => addToWishlist(book)}>
+                        Add to Wishlist
+                      </button>
+                      <RatingStars
+                        bookId={book.id}
+                        initialRating={book.rating}
+                      />
                     </div>
-                  </li>
-                ))}
-              </ul>
-    
-              )
-            }
-               
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+
           <div className="watermark">
             <img
               src="../../images/Windows Icons - PNG/shell32.dll_14_23-8.png"

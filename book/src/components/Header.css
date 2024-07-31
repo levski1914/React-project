@@ -52,10 +52,12 @@
   padding: 5px 10px;
 }
 
+
 .under-title li:hover{
     background-color: #1660E8;
     color: #fff !important;
 }
+
 
 .under-title li:first-child{
   position: relative;
@@ -89,6 +91,10 @@
 }
 .semiMenu li a{
   color: #000 !important;
+}
+
+.semiMenu li:hover a{
+  color: #fff !important;
 }
 
 .container {

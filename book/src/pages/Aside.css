@@ -43,7 +43,8 @@
 .aside-row{
     display: flex;
     align-items: center;
-    
+    gap: 10px;
+    padding: 3px 0;
 }
 
 .aside-row img{

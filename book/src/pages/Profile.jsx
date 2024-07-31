@@ -1,18 +1,36 @@
 // src/pages/Profile.js
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc,deleteDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Authcontext";
-
-const Profile = () => {
+import { Link } from "react-router-dom";
+import EditAccount from './EditAccount';
+import Aside from './Aside'
+import "./Profile.css"
+const Profile = ({onClose}) => {
   const { currentUser } = useAuth();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [editMode, setEditMode] = useState(false);
+  
+  const [showWarning,setShowWarning]=useState(false);
   const navigate = useNavigate();
 
+ 
+  const handleDelete = async () => {
+    try {
+      const userDoc = doc(db, "users", currentUser.uid);
+      await deleteDoc(userDoc);
+      alert("Акаунтът е успешно изтрит!");
+      navigate("/login");
+    } catch (error) {
+      alert("Грешка! " + error.message);
+    }
+  };
   useEffect(() => {
+
     const fetchUser = async () => {
       if (currentUser) {
         try {
@@ -49,18 +67,75 @@ const Profile = () => {
     return <p>{error}</p>;
   }
 
+  const handleCloseEdit=()=>setEditMode(false);
+  const handleCloseDelete=()=>setDeleteMode(false);
+
   return (
-    <div>
+    <>
+          <div className="Profile">
+      <Aside />
+
+      <div className="profile-main">
+
+      <div className="header-profile">
+        <img src="../../images/Windows Icons - PNG/shell32.dll_14_269-4.png" alt="#" />
+        <p>User Accounts</p>
+      </div>
+
+      <div className="Tasks">
+        <h1>Pick a Task...</h1>
+        <ul>
+          <li>
+            <Link to="/logout">
+            <img src="../../images/download (8).png" alt="" /> <span>Change an account</span>
+            </Link></li>
+          <li onClick={()=>setEditMode(true)}>
+            <img src="../../images/Windows Icons - PNG/shell32.dll_14_325-5.png" alt="" /> <span>Edit an account</span></li>
+            <li onClick={() => setShowWarning(true)}>
+                <img src="../../images/Windows Icons - PNG/shell32.dll_14_32-7.png" alt="" /> 
+                <span>Delete an account</span>
+              </li>
+            </ul>
+            {showWarning && (
+              <div className="warning">
+                <div className="title-bar warning-bar">
+              
+                  <p>Warning</p>
+                  <button className="close" onClick={()=>setShowWarning(false)}>
+                  </button>
+                </div>
+                <div className="warning-body ">
+                  <div className="message">
+                <img src="../../images/Windows Icons - PNG/user32.dll_14_103-6.png" alt="" />
+                <p>Are you sure you want to delete this account?</p>
+
+                  </div>
+                <button onClick={handleDelete}>Да, изтрий</button>
+               
+                </div>
+              </div>
+            )}
+        <h1>Your profile details</h1>
       {user ? (
         <div>
-          <h1>{user.name}</h1>
+          <h2>{user.name}</h2>
           <p>Email: {user.email}</p>
           {/* Добавете повече детайли при необходимост */}
         </div>
       ) : (
         <p>User not found</p>
       )}
-    </div>
+      </div>
+
+      </div>
+      </div>
+      {editMode && (
+        <div className="modal">
+          <EditAccount currentUser={currentUser} onClose={handleCloseEdit} />
+        </div>
+      )}
+    
+    </>
   );
 };
 

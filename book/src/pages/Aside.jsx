@@ -33,6 +33,10 @@ const Aside = ({ handleTabClick }) => {
                 <img src="../../images/download (7).png" alt="" />
                 <Link to="/manage-books">Manage books</Link>
               </div>
+              <div className="aside-row">
+                <img src="../../images/Windows Icons - PNG/shell32.dll_14_269-4.png" alt="" />
+                <Link to="/profile">User account</Link>
+              </div>
             </div>
           </article>
         </>

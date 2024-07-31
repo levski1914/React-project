@@ -51,9 +51,6 @@ const Header = () => {
             <li>Tools</li>
             <li>Favorites</li>
             <li>Help</li>
-            <li>
-              <Link to="/minesweeper">Minesweeper</Link>
-            </li>
           </ul>
 
           <div className="logo">

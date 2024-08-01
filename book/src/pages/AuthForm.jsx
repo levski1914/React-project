@@ -1,6 +1,6 @@
 // src/components/AuthForm.js
 import React from "react";
-
+import { Link } from "react-router-dom";
 const AuthForm = ({ title, fields, handleSubmit, buttonLabel, formClass }) => {
   return (
     <div className="loginPage">
@@ -26,8 +26,11 @@ const AuthForm = ({ title, fields, handleSubmit, buttonLabel, formClass }) => {
                 />
               </div>
             ))}
-            <div className="submit">
-              <button type="submit"></button>
+            <div className="acc-sub">
+              <div className="submit">
+                <button type="submit"></button>
+              </div>
+              <Link to="/register">Don't have account ?</Link>
             </div>
           </form>
         </div>

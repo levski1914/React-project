@@ -22,6 +22,15 @@ export const WishlistProvider = ({ children }) => {
       prevWishlist.filter((book) => book.id !== id)
     );
   };
+
+  const toggleWishlist = (book) => {
+    const exist = wishlist.some((item) => item.id === book.id);
+    if (exist) {
+      removeFromWishlist(book.id);
+    } else {
+      addToWishlist(book);
+    }
+  };
   return (
     <WishlistContext.Provider
       value={{
@@ -29,6 +38,7 @@ export const WishlistProvider = ({ children }) => {
         addToWishlist,
         wishlistCount: wishlist.length,
         removeFromWishlist,
+        toggleWishlist,
       }}
     >
       {children}

@@ -4,8 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Styles/Card.css";
 import RatingStars from "../components/Rating";
 import { useAuth } from "../Authcontext";
+import { useWishlist } from "./WishContext";
 
-const Cards = ({ book, addToWishlist, getImage }) => {
+const Cards = ({ book, getImage }) => {
   const cardRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [mousePosition, setMousePosition] = useState({ mouseX: 0, mouseY: 0 });
@@ -14,7 +15,14 @@ const Cards = ({ book, addToWishlist, getImage }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [likes, setLikes] = useState({});
+
   const { currentUser } = useAuth();
+  const { wishlist, toggleWishlist } = useWishlist();
+
+  const [isLiked, setIsLiked] = useState(
+    wishlist.some((item) => item.id === book.id)
+  );
+
   useEffect(() => {
     const card = cardRef.current;
     const updateDimensions = () => {
@@ -28,6 +36,10 @@ const Cards = ({ book, addToWishlist, getImage }) => {
       window.removeEventListener("resize", updateDimensions);
     };
   }, []);
+
+  useEffect(() => {
+    setIsLiked(wishlist.some((item) => item.id === book.id));
+  }, [wishlist, book.id]);
 
   const handleMouseMove = (event) => {
     const rect = cardRef.current.getBoundingClientRect();
@@ -43,6 +55,12 @@ const Cards = ({ book, addToWishlist, getImage }) => {
   const toggleComments = () => {
     setShowComments(!showComments);
   };
+
+  const { width, height } = dimensions;
+  const { mouseX, mouseY } = mousePosition;
+
+  const mousePX = mouseX / width;
+  const mousePY = mouseY / height;
 
   const handleCommentsSubmit = (e) => {
     e.preventDefault();
@@ -73,26 +91,14 @@ const Cards = ({ book, addToWishlist, getImage }) => {
     );
   };
 
-  const { width, height } = dimensions;
-  const { mouseX, mouseY } = mousePosition;
-
-  const mousePX = mouseX / width;
-  const mousePY = mouseY / height;
-
   const cardStyle = {
     transform: `rotateY(${mousePX * 30}deg) rotateX(${mousePY * -30}deg)`,
   };
 
-  const cardBgTransform = {
-    transform: `translateX(${mousePX * -30}px) translateY(${mousePY * -30}px)`,
-    backgroundImage: `url(${getImage(book.imageLink)})`,
+  const handleWishlistClick = () => {
+    toggleWishlist(book);
   };
-  const getImageUrl = () => {
-    if (book.imageUrl) {
-      return book.imageUrl;
-    }
-    return getImage(book.imageLink);
-  };
+
   return (
     <div className={`card-container ${showComments ? "expanded" : ""}`}>
       <div
@@ -107,8 +113,13 @@ const Cards = ({ book, addToWishlist, getImage }) => {
           <h2>{book.title}</h2>
           <p>Author: {book.author}</p>
         </div>
-        <span onClick={() => addToWishlist(book)} className="wishIcon">
-          <FontAwesomeIcon icon="fa-regular fa-heart" />
+        <span
+          onClick={handleWishlistClick}
+          className={`wishIcon ${isLiked ? "liked" : ""}`}
+        >
+          <FontAwesomeIcon
+            icon={isLiked ? "fa-solid fa-heart" : "fa-regular fa-heart"}
+          />
         </span>
         <button className="Show" onClick={toggleComments}>
           <FontAwesomeIcon icon="fa-solid fa-comments" />

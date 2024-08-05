@@ -152,14 +152,26 @@ const ManageBooks = () => {
         </form>
 
         <ul>
+          <li className="topBar">
+            <span>Title/Author</span>
+
+            <span>image</span>
+            <span>edit</span>
+            <span>delete</span>
+          </li>
           {books.map((book) => (
             <li key={book.id} className="userBooks">
               {book.title} by {book.author}
               {book.imageUrl && <img src={book.imageUrl} alt={book.title} />}
               {book.userId === currentUser.uid && (
                 <>
-                  <button onClick={() => handleEditBook(book)}>Edit</button>
-                  <button onClick={() => handleDeleteBook(book.id)}>
+                  <button className="btn" onClick={() => handleEditBook(book)}>
+                    Edit
+                  </button>
+                  <button
+                    className="btn"
+                    onClick={() => handleDeleteBook(book.id)}
+                  >
                     Delete
                   </button>
                 </>
@@ -169,9 +181,17 @@ const ManageBooks = () => {
         </ul>
       </div>
       {editBook && (
-        <div className="modal">
-          <div className="modal-content">
+        <div className="warning editing">
+          <div className="title-bar warning-bar editing-bar">
+            <h3>Editing window</h3>
+            <button
+              className="close"
+              onClick={() => setEditBook(null)}
+            ></button>
+          </div>
+          <div className="warning-body">
             <form onSubmit={handleUpdateBook}>
+              <label htmlFor="">Title:</label>
               <input
                 type="text"
                 placeholder="New Title"
@@ -179,6 +199,7 @@ const ManageBooks = () => {
                 onChange={(e) => setNewTitle(e.target.value)}
                 required
               />
+              <label htmlFor="">Author:</label>
               <input
                 type="text"
                 placeholder="New Author"
@@ -193,8 +214,14 @@ const ManageBooks = () => {
               {newImage && (
                 <img src={URL.createObjectURL(newImage)} alt="Preview" />
               )}
-              <button type="submit">Update Book</button>
-              <button type="button" onClick={() => setEditBook(null)}>
+              <button type="submit" className="btn">
+                Update Book
+              </button>
+              <button
+                type="button"
+                className="btn"
+                onClick={() => setEditBook(null)}
+              >
                 Cancel
               </button>
             </form>

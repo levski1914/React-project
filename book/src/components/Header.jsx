@@ -27,7 +27,7 @@ const Header = () => {
                 {currentUser ? (
                   <>
                     <li>
-                      <Link to="/profile">Edit profile</Link>
+                      <Link to="/profile">User account</Link>
                     </li>
                     <li>
                       <Link to="/manage-books">Manage Books</Link>

@@ -114,3 +114,7 @@
     
 }
 
+.wishIcon:active{
+    background-color: black;
+}
+

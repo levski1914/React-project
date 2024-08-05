@@ -15,15 +15,14 @@ import {
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useAuth } from "../Authcontext";
 import Aside from "./Aside";
-import './Styles/Manage.css'
-
+import "./Styles/Manage.css";
 
 const ManageBooks = () => {
   const [books, setBooks] = useState([]);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [image, setImage] = useState(null);
-  const [editBook,setEditBook]=useState(null);
+  const [editBook, setEditBook] = useState(null);
   const [newTitle, setNewTitle] = useState("");
   const [newAuthor, setNewAuthor] = useState("");
   const [newImage, setNewImage] = useState(null);
@@ -31,10 +30,12 @@ const ManageBooks = () => {
 
   useEffect(() => {
     const fetchBooks = async () => {
-      if(currentUser){
-
+      if (currentUser) {
         const booksCollection = collection(db, "books");
-        const q=query(booksCollection,where("userId","==",currentUser.uid));
+        const q = query(
+          booksCollection,
+          where("userId", "==", currentUser.uid)
+        );
         const booksSnapshot = await getDocs(q);
         const booksList = booksSnapshot.docs.map((doc) => ({
           ...doc.data(),
@@ -81,12 +82,12 @@ const ManageBooks = () => {
     }
   };
 
-  const handleEditBook=(book)=>{
+  const handleEditBook = (book) => {
     setEditBook(book);
     setNewTitle(book.title);
     setNewAuthor(book.author);
     setNewImage(null);
-  }
+  };
   const handleUpdateBook = async (e) => {
     e.preventDefault();
     const bookDoc = doc(db, "books", editBook.id);
@@ -118,24 +119,19 @@ const ManageBooks = () => {
     setNewImage(null);
   };
 
-
-
   const handleDeleteBook = async (id) => {
     const bookDoc = doc(db, "books", id);
     await deleteDoc(bookDoc);
     setBooks(books.filter((book) => book.id !== id));
   };
 
-
   return (
     <div className="Manage">
       <Aside />
       <div className="Manage-Container">
+        <h1>Manage Books</h1>
 
-
-      <h1>Manage Books</h1>
-      
-      <form onSubmit={editBook ? handleUpdateBook : handleAddBook}>
+        <form onSubmit={editBook ? handleUpdateBook : handleAddBook}>
           <input
             type="text"
             placeholder="Title"
@@ -150,7 +146,7 @@ const ManageBooks = () => {
             onChange={(e) => setAuthor(e.target.value)}
             required
           />
-         <input type="file" onChange={(e) => setImage(e.target.files[0])} />
+          <input type="file" onChange={(e) => setImage(e.target.files[0])} />
           {image && <img src={URL.createObjectURL(image)} alt="Preview" />}
           <button type="submit">Add Book</button>
         </form>
@@ -173,9 +169,8 @@ const ManageBooks = () => {
         </ul>
       </div>
       {editBook && (
-          <div className="modal">
-            <div className="modal-content">
-
+        <div className="modal">
+          <div className="modal-content">
             <form onSubmit={handleUpdateBook}>
               <input
                 type="text"
@@ -191,14 +186,21 @@ const ManageBooks = () => {
                 onChange={(e) => setNewAuthor(e.target.value)}
                 required
               />
-              <input type="file" onChange={(e) => setNewImage(e.target.files[0])} />
-              {newImage && <img src={URL.createObjectURL(newImage)} alt="Preview" />}
+              <input
+                type="file"
+                onChange={(e) => setNewImage(e.target.files[0])}
+              />
+              {newImage && (
+                <img src={URL.createObjectURL(newImage)} alt="Preview" />
+              )}
               <button type="submit">Update Book</button>
-              <button type="button" onClick={() => setEditBook(null)}>Cancel</button>
+              <button type="button" onClick={() => setEditBook(null)}>
+                Cancel
+              </button>
             </form>
-            </div>
           </div>
-        )}
+        </div>
+      )}
     </div>
   );
 };

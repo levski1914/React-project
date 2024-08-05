@@ -110,10 +110,18 @@
   font-size: 1.3em;
 }
 
+.comment-header h5{
+  color: #ccc !important;
+  padding-right: 10px !important;
+}
 
+.comment-body{
+  color: #0066ff !important;
+  word-wrap: break-word;
+}
 
 .likes .icons{
-  display: flex;
+  display: flex; 
   align-items: center;
   gap: 10px;
 }

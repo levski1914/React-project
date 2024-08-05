@@ -131,11 +131,15 @@ const Cards = ({ book, getImage }) => {
               <li key={comment.id} className="comment">
                 <div className="comment-header">
                   <h4>{comment.user}</h4>
+                  <div className="comment-body">{comment.text}</div>
                   <h5>
-                    Posted:{" "}
+                    Posted:
                     {Math.floor((new Date() - comment.timestamp) / 60000)} min
                     ago
-                    <span onClick={() => handleLike(comment.id)}>
+                    <span
+                      style={{ paddingLeft: "10px" }}
+                      onClick={() => handleLike(comment.id)}
+                    >
                       <FontAwesomeIcon icon="fa-regular fa-thumbs-up" />
                     </span>
                     <span>{likes[comment.id] || 0}</span>
@@ -149,7 +153,6 @@ const Cards = ({ book, getImage }) => {
                     )}
                   </h5>
                 </div>
-                <div className="comment-body">{comment.text}</div>
               </li>
             ))}
           </ul>

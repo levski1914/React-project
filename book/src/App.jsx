@@ -1,5 +1,6 @@
 // src/App.js
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// import "cypress-real-events/support";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -27,11 +28,9 @@ import { useEffect, useState } from "react";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 
-
 library.add(fab, fas, far);
 
 function App() {
-
   useEffect(() => {
     document.addEventListener("click", playClickSound);
     return () => {
@@ -39,11 +38,9 @@ function App() {
     };
   }, []);
 
-
   return (
     <AuthProvider>
       <WishlistProvider>
-
         <Router>
           <Header />
           <Routes>
@@ -53,7 +50,6 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/books" element={<BookList />} />
             <Route path="/search" element={<Search />} />
-          
 
             <Route
               path="/manage-books"
@@ -73,12 +69,9 @@ function App() {
           <Footer />
           <ToastContainer />
         </Router>
-
-  
       </WishlistProvider>
     </AuthProvider>
   );
 }
 
 export default App;
-

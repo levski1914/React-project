@@ -1,7 +1,7 @@
 // src/components/AuthForm.js
 import React from "react";
 import { Link } from "react-router-dom";
-const AuthForm = ({ title, fields, handleSubmit, buttonLabel, formClass }) => {
+const AuthForm = ({ title, fields, handleSubmit, formClass }) => {
   return (
     <div className="loginPage">
       <div className="loginHeader"></div>

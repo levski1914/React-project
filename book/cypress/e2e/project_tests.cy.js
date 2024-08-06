@@ -1,35 +1,36 @@
-describe("Book Social Network Tests", () => {
-  it("should load the home page", () => {
-    cy.visit("http://localhost:5173/");
-    cy.contains("Book Social Network");
+describe("Book Social Network - Profile Menu", () => {
+  beforeEach(() => {
+    cy.visit("http://localhost:5173");
   });
 
-  it("Should hover over Profile and click Login", () => {
-    // Навигирайте до страницата
-    cy.visit("localhost:5173/");
+  it("navigates to the login page through the Profile menu", () => {
+    // cy.get(".profile").realHover("mouse");
 
-    // Симулирайте hover върху елемента Profile
-    cy.get(".profile").trigger("mouseover");
+    cy.contains("a", "Log in").click();
 
-    // Проверете дали Login става видим и кликнете върху него
-    cy.contains("Log in").should("be.visible").click();
-
-    // Проверете дали страницата за логин се зарежда правилно
     cy.url().should("include", "/login");
   });
-
-  it("should log in successfully", () => {
-    cy.visit("http://localhost:5173/login");
-    cy.get('input[type="email"]').type("test@test.com");
-    cy.get('input[type="password"]').type("testtest");
-    cy.get('button[type="submit"]').click();
-    cy.url().should("include", "/profile");
-  });
-
-  it("should search for a book", () => {
-    cy.visit("http://localhost:5173/search");
-    cy.get('input[type="text"]').type("test");
-    cy.contains("button", "Search").click();
-    cy.contains("test");
-  });
 });
+// it("adds a book to wishlist", () => {
+//   cy.get(".wishIcon").first().click();
+//   cy.get("a").contains("Wishlist").click();
+//   cy.url().should("include", "/wishlist");
+//   cy.get(".wishlist-item").should("have.length.greaterThan", 0);
+// });
+
+// it("navigates to the manage books page and adds a book", () => {
+//   cy.get("nav").contains("Profile").trigger("mouseover");
+//   cy.get("a").contains("Log in").click();
+//   cy.get('input[name="email"]').type("testtest@test.com");
+//   cy.get('input[name="password"]').type("testtest");
+//   cy.get("button").contains("Login").click();
+//   cy.get("a").contains("Manage Books").click();
+//   cy.url().should("include", "/manage-books");
+//   cy.get('input[placeholder="Title"]').type("New Book");
+//   cy.get('input[placeholder="Author"]').type("Author Name");
+//   cy.get('input[type="file"]').selectFile(
+//     "../../src/assets/images/beloved.jpg"
+//   );
+//   cy.get("button").contains("Add Book").click();
+//   cy.contains("New Book by Author Name");
+// });

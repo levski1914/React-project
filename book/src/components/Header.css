@@ -44,7 +44,7 @@
   gap: 10px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   border-right: 1px solid rgba(0, 0, 0, 0.1);
-  align-items: center;
+  /* align-items: center; */
 }
 
 .under-title li{
@@ -96,13 +96,24 @@
 .help ul{
   flex-direction: column;
 }
+.help ul li{
+  padding: 0;
+}
+.help ul li a{
+  padding: 5px 10px;
+  display: inline-block;
+width: 100%;
+}
 
 .semiMenu li{
   /* display: contents; */
-  width:100%;
+ padding: 0;
 }
 .semiMenu li a{
   color: #000 !important;
+  padding: 5px 10px;
+  display: inline-block;
+width: 100%;
 }
 
 .semiMenu li:hover a{

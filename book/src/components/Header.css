@@ -85,6 +85,18 @@
     display: grid
 }
 
+.under-title .help:last-child:hover .semiMenu{
+    display: grid
+}
+
+.help{
+  position: relative;
+}
+
+.help ul{
+  flex-direction: column;
+}
+
 .semiMenu li{
   /* display: contents; */
   width:100%;

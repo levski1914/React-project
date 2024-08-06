@@ -50,7 +50,21 @@ const Header = () => {
             </li>
             <li>Tools</li>
             <li>Favorites</li>
-            <li>Help</li>
+            <li className="profile help">Help
+                <div className="semiMenu">
+                    <ul>
+                      <li>
+                        <Link to="/about">About</Link>
+                      </li>
+                      <li>
+                        <Link to="/contact">Contact</Link>
+                      </li>
+                    </ul>
+                </div>
+
+
+
+            </li>
           </ul>
 
           <div className="logo">

@@ -31,7 +31,7 @@ const Register = () => {
         email: user.email,
       });
       toast.success("Registration successful!");
-      navigate("/profile"); // Пренасочете към профила след успешна регистрация
+      navigate("/profile");
     } catch (error) {
       setError(error.message);
       toast.error("Registration failed: " + error.message);

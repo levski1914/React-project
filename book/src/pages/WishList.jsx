@@ -1,6 +1,4 @@
-// src/pages/Wishlist.js
 import React, { useState } from "react";
-// import { useWishlist } from "WishlistContext";
 import "./Styles/WishList.css";
 import { useWishlist } from "./WishContext";
 import Aside from "./Aside";

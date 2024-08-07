@@ -1,4 +1,3 @@
-// src/components/AuthForm.js
 import React from "react";
 import { Link } from "react-router-dom";
 const AuthForm = ({ title, fields, handleSubmit, formClass }) => {

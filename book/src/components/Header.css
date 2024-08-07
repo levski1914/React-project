@@ -85,7 +85,7 @@
     display: grid
 }
 
-.under-title .help:last-child:hover .semiMenu{
+.under-title .help:hover .semiMenu{
     display: grid
 }
 
@@ -289,4 +289,17 @@ width: 100%;
   .header-part img {
       width: 100%;
   }
+}
+
+
+.PaintTool{
+  display: flex;
+  align-items: center;
+}
+
+.PaintTool span{
+  background-image: url('../assets/paint.png');
+  width: 30px;
+  height: 30px;
+  display: inline-block;
 }

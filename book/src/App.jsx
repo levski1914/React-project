@@ -1,6 +1,6 @@
-// src/App.js
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // import "cypress-real-events/support";
+import "@christianliebel/paint";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -27,6 +27,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { useEffect, useState } from "react";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Paint from "./Windows/Paint/Paint";
 
 library.add(fab, fas, far);
 
@@ -50,6 +51,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/books" element={<BookList />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/paint" element={<Paint />} />
 
             <Route
               path="/manage-books"

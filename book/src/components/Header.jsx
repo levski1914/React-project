@@ -1,8 +1,7 @@
 // src/components/Header.js
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Header.css"; // Импортиране на CSS файла за стилове
-
+import "./Header.css";
 import { useAuth } from "../Authcontext";
 const Header = () => {
   const { currentUser } = useAuth();
@@ -48,7 +47,17 @@ const Header = () => {
                 )}
               </div>
             </li>
-            <li>Tools</li>
+            <li className="profile help">
+              Tools
+              <div className="semiMenu">
+                <ul>
+                  <li className="PaintTool">
+                    <span></span>
+                    <Link to="/paint">Paint</Link>
+                  </li>
+                </ul>
+              </div>
+            </li>
             <li>Favorites</li>
             <li className="profile help">
               Help

@@ -1,10 +1,8 @@
-// src/pages/Login.js
 import React, { useState } from "react";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import "./Styles/Login.css";
 import AuthForm from "./AuthForm";

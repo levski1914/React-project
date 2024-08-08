@@ -1,32 +1,38 @@
-import React, { useState } from 'react'
-import {db} from '../firebase';
-import {doc,updateDoc} from 'firebase/firestore'
-import { updatePassword, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth';
-import { useAuth } from '../Authcontext';
-import { toast } from 'react-toastify';
+import React, { useState } from "react";
+import { db } from "../firebase";
+import { doc, updateDoc } from "firebase/firestore";
+import {
+  updatePassword,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
+} from "firebase/auth";
 
-const EditAccount = ({currentUser,onClose}) => {
-    const [username,setUsername]=useState(currentUser.name);
-    const [currentPassword,setCurrentPassword]=useState('');
-    const [newPassword,setNewPassword]=useState('');
-    const handleUpdate=async()=>{
-        try{
-            const userDoc=doc(db,'users',currentUser.uid);
-            await updateDoc(userDoc,{name:username});
-            if(newPassword){
-                const credential=EmailAuthProvider.credential(currentUser.email,currentPassword)
-                await reauthenticateWithCredential(auth.currentUser,credential)
+import { toast } from "react-toastify";
 
-                await updatePassword(auth.currentUser,newPassword)
-            }
+const EditAccount = ({ currentUser, onClose }) => {
+  const [username, setUsername] = useState(currentUser.name);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const handleUpdate = async () => {
+    try {
+      const userDoc = doc(db, "users", currentUser.uid);
+      await updateDoc(userDoc, { name: username });
+      if (newPassword) {
+        const credential = EmailAuthProvider.credential(
+          currentUser.email,
+          currentPassword
+        );
+        await reauthenticateWithCredential(auth.currentUser, credential);
 
-            toast.success("password changed successfuly");
-            onClose();
+        await updatePassword(auth.currentUser, newPassword);
+      }
 
-        }catch(error){
-            toast.error("Error updating profile" + error.message)
-        }
+      toast.success("password changed successfuly");
+      onClose();
+    } catch (error) {
+      toast.error("Error updating profile" + error.message);
     }
+  };
   return (
     <div>
       <h2>Редактиране на акаунт</h2>
@@ -57,7 +63,7 @@ const EditAccount = ({currentUser,onClose}) => {
       <button onClick={handleUpdate}>Запази промените</button>
       <button onClick={onClose}>Отказ</button>
     </div>
-  )
-}
+  );
+};
 
-export default EditAccount
+export default EditAccount;

@@ -1,4 +1,3 @@
-// src/pages/ManageBooks.js
 import React, { useState, useEffect } from "react";
 import { db, storage } from "../firebase";
 import {
@@ -78,7 +77,7 @@ const ManageBooks = () => {
       setTitle("");
       setAuthor("");
       setImage(null);
-      toast.success("Added successfuly new book!")
+      toast.success("Added successfuly new book!");
     } catch (error) {
       console.error("Error adding book: ", error);
     }
@@ -125,7 +124,7 @@ const ManageBooks = () => {
     const bookDoc = doc(db, "books", id);
     await deleteDoc(bookDoc);
     setBooks(books.filter((book) => book.id !== id));
-    toast.success("Book successfuly removed!")
+    toast.success("Book successfuly removed!");
   };
 
   return (

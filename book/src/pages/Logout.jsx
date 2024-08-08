@@ -1,4 +1,3 @@
-// src/pages/Logout.js
 import React, { useEffect } from "react";
 import { useAuth } from "../Authcontext";
 import { useNavigate } from "react-router-dom";

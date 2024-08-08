@@ -1,4 +1,3 @@
-// src/components/Card.js
 import React, { useRef, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Styles/Card.css";

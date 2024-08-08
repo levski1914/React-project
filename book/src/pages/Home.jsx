@@ -1,5 +1,4 @@
 import React, { act, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Styles/Home.css";
 import { db } from "../firebase";
@@ -21,7 +20,7 @@ const getImage = (imageName) => {
 
 const Home = ({ limit = 8, one = 1, six = 4 }) => {
   const { currentUser } = useAuth();
-  const { wishlistCount } = useWishlist();
+
   const [books, setBooks] = useState([]);
   const { addToWishlist } = useWishlist();
   const [activeTab, setActiveTab] = useState("allInOne");

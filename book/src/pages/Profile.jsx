@@ -49,7 +49,7 @@ const Profile = ({ onClose }) => {
           );
         }
       } else {
-        navigate("/login"); // Пренасочете потребителя към страницата за вход
+        navigate("/login");
       }
       setLoading(false);
     };

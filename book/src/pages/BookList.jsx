@@ -10,7 +10,7 @@ const images = import.meta.glob("../assets/images/*.{png,jpg,jpeg,svg}", {
   eager: true,
 });
 
-const getImage = (imageName) => {
+const getImages = (imageName) => {
   const matchedImage = Object.keys(images).find((key) =>
     key.includes(imageName)
   );
@@ -89,7 +89,7 @@ const BookList = () => {
             {filteredBooks.map((book) => (
               <li key={book.id}>
                 <img
-                  src={book.imageUrl || getImage(book.imageLink)}
+                  src={book.imageUrl || getImages(book.imageLink)}
                   alt={book.title}
                 />
                 <div className="bookDetails">

@@ -48,7 +48,19 @@ const Header = () => {
                 )}
               </div>
             </li>
-            <li>Tools</li>
+            <li className="profile help">Tools
+            <div className="semiMenu">
+                <ul>
+                  <li>
+                    <Link to="/about">About</Link>
+                  </li>
+                  <li>
+                    <Link to="/contact">Contact</Link>
+                  </li>
+                </ul>
+              </div>
+
+            </li>
             <li>Favorites</li>
             <li className="profile help">
               Help

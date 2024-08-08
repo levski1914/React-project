@@ -27,6 +27,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { useEffect, useState } from "react";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Paint from "./pages/Windows/Paint";
 
 library.add(fab, fas, far);
 
@@ -50,6 +51,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/books" element={<BookList />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/paint" element={<Paint />} />
 
             <Route
               path="/manage-books"
@@ -75,3 +77,5 @@ function App() {
 }
 
 export default App;
+
+

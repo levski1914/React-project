@@ -85,7 +85,7 @@ const Home = ({ limit = 8, one = 1, six = 4 }) => {
                             book={book}
                             addToWishlist={addToWishlist}
                             getImage={getImage}
-                            currentUser={currentUser}
+                            currentUser={currentUser} 
                           />
                         ))}
                         {OneBook.map(
